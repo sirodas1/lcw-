@@ -13,7 +13,12 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="max-h-screen overflow-hidden">
+        <div class="absolute -bottom-56 -left-60 -z-10">
+            <div class="bg-white opacity-40 ">
+                <img src="{{asset('img/LCW.png')}}" class="w-3/5">
+            </div>
+        </div>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>

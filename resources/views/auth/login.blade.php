@@ -1,56 +1,42 @@
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
+        <div class="flex justify-center mb-0">
+            <span class="font-bold text-gray-800" style="font-size:10px;"><strong>LOVE CENTER WORLWIDE</strong></span>
+        </div>
+        <div class="flex justify-center mt-0">
+            <span class="text-xl font-extrabold text-black"><strong>USER LOGIN</strong></span>
+        </div>
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form id="loginForm" method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="mt-5 px-8">
+                <div class="flex flex-row group bg-red-400 hover:bg-red-600 focus:bg-red-600 rounded-l-full rounded-r-full px-8 py-2" style="">
+                    <div class="basis-1/12 mt-2">
+                      <img src="/img/id-card@2x.png" class="self-center w-full h-auto">
+                    </div>
+                    <div class="basis-11/12 ml-2 px-0">
+                      <input id="username" type="text" class="bg-red-400  group-hover:bg-red-600 text-white outline-none border-none w-full placeholder:text-white placeholder:font-bold placeholder:text-lg focus:outline-none focus:border-none" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
+                    </div>
+                </div>
+                <x-input-error :messages="$errors->get('username')" class="mt-2" />
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+            <div class="mt-6 px-8">
+                <div class="flex flex-row group bg-red-400 hover:bg-red-600 focus:bg-red-600 rounded-l-full rounded-r-full px-8 py-2">
+                    <div class="basis-1/12 mt-2">
+                        <img src="/img/padlock@2x.png" class="self-center w-9/12 h-auto">
+                    </div>
+                    <div class="basis-11/12 ml-2 px-0">
+                        <input id="password" type="password" class="bg-red-400  group-hover:bg-red-600 text-white outline-none border-none w-full placeholder:text-white placeholder:font-bold placeholder:text-lg focus:outline-none focus:border-none" name="password" required autocomplete="current-password" placeholder="Password">
+                    </div>
+                </div>
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-primary-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
             </div>
         </form>
     </x-auth-card>
