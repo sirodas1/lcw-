@@ -1,6 +1,6 @@
 <div class="h-screen w-80 fixed z-50 top-0 left-0 bg-white overflow-x-hidden pt-4 md:pt-5">
     <div class="flex justify-center mt-2">
-        <img src="{{asset('img/LCW.png')}}" class="self-center h-auto w-50">
+        <img src="{{asset('img/logo.png')}}" class="self-center h-auto w-50">
     </div>
     <div class="flex justify-center mt-3">
         <div class="basis-9/12">
