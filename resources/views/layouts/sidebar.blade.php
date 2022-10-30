@@ -15,17 +15,17 @@
         <div class="basis-10/12">
             <a href="#" class="mt-3 w-full">
                 <span class="text-red-400"><i class="fa fa-user-tie"></i></span>&emsp; 
-                Zones & Zone Head 
+                Zones & Zone Heads 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
             <a href="#" class="mt-2">
                 <span class="text-red-400"><i class="fa fa-archive"></i></span>&emsp; 
-                Medical Inventory 
+                Members 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
             <a href="#" class="mt-2">
                 <span class="text-red-400"><i class="fa fa-user-injured"></i></span>&emsp; 
-                Patients 
+                Programs 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
             <a href="#" class="mt-2">

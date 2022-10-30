@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->enum('user_type', ['Admin', 'Zone Leader'])->default('Admin');
-            $table->unsignedBigInteger('member_id')->nullable();
+            $table->string('name')->unique();
+            $table->unsignedBigInteger('leader_id')->nullable();
+            $table->foreign('leader_id')->references('id')->on('users')->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('zones');
     }
 };

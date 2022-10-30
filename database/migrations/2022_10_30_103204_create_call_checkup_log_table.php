@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('call_checkup_log', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->enum('user_type', ['Admin', 'Zone Leader'])->default('Admin');
-            $table->unsignedBigInteger('member_id')->nullable();
+            $table->foreignId('user_id')->nullable()->nullOnDelete();
+            $table->foreignId('member_id')->cascadeOnDelete();
+            $table->boolean('status')->default(false);
+            $table->mediumText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('call_checkup_log');
     }
 };

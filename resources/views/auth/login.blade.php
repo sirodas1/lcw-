@@ -19,7 +19,7 @@
                       <img src="/img/id-card@2x.png" class="self-center w-full h-auto">
                     </div>
                     <div class="basis-11/12 ml-2 px-0">
-                      <input id="username" type="text" class="bg-red-400  group-hover:bg-red-600 text-white outline-none border-none w-full placeholder:text-white placeholder:font-bold placeholder:text-lg focus:outline-none focus:border-none" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
+                      <input id="username" type="text" class="bg-red-400  group-hover:bg-red-600 text-white outline-none border-none w-full placeholder:text-white placeholder:font-bold placeholder:text-lg focus:ring-0" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username">
                     </div>
                 </div>
                 <x-input-error :messages="$errors->get('username')" class="mt-2" />
@@ -32,7 +32,7 @@
                         <img src="/img/padlock@2x.png" class="self-center w-9/12 h-auto">
                     </div>
                     <div class="basis-11/12 ml-2 px-0">
-                        <input id="password" type="password" class="bg-red-400  group-hover:bg-red-600 text-white outline-none border-none w-full placeholder:text-white placeholder:font-bold placeholder:text-lg focus:outline-none focus:border-none" name="password" required autocomplete="current-password" placeholder="Password">
+                        <input id="password" type="password" class="bg-red-400  group-hover:bg-red-600 text-white outline-none border-none w-full placeholder:text-white placeholder:font-bold placeholder:text-lg focus:ring-0" name="password" required autocomplete="current-password" placeholder="Password">
                     </div>
                 </div>
 

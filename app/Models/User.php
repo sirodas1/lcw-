@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'username', 'password', 'user_type', 'member_id'
     ];
 
     /**
@@ -33,12 +31,21 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+    }
+
+    public function zones()
+    {
+        if($this->user_type == 'Admin')
+            return Zone::all();
+        else
+            return $this->hasMany(Zone::class, 'leader_id');
+    }
+
+    public function callLogs()
+    {
+        return $this->hasMany(CallCheckupLog::class, 'user_id');
+    }
 }
