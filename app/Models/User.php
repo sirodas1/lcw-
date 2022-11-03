@@ -38,10 +38,7 @@ class User extends Authenticatable
 
     public function zones()
     {
-        if($this->user_type == 'Admin')
-            return Zone::all();
-        else
-            return $this->hasMany(Zone::class, 'leader_id');
+        return $this->hasMany(Zone::class, 'leader_id');
     }
 
     public function callLogs()

@@ -19,7 +19,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+        Route::get('/', [DashboardController::class, 'home'])->name('home');
+        Route::post('/add/zone', [DashboardController::class, 'addZone'])->name('zone.add');    
+    });
 });
 
 require __DIR__.'/auth.php';

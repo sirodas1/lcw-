@@ -1,4 +1,4 @@
-<div class="group border-2 border-red-300 rounded-lg p-5 hover:border-red-400 hover:bg-red-400 hover:cursor-pointer">
+<div class="group border-2 border-red-300 rounded-lg p-5 hover:border-red-400 hover:bg-red-400 hover:cursor-pointer shadow-sm hover:shadow-lg">
     <div class="flex justify-between text-red-400 group-hover:text-white">
         <span class="text-lg font-semibold">{{$name}}</span>
         <span class="text-sm">{{$leader}}</span>
