@@ -37,9 +37,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/update/member/{member}', [MembersController::class, 'updateMember'])->name('update');    
     });
     Route::group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
-        Route::get('/', [MembersController::class, 'home'])->name('homeVisitors');
+        Route::get('/', [MembersController::class, 'homeVisitors'])->name('home');
+        Route::get('/log/attendance/{visitor}', [MembersController::class, 'logAttendance'])->name('log.attendance');
         Route::get('/add/visitor', [MembersController::class, 'addVisitor'])->name('add');
-        Route::post('/save/visitor', [MembersController::class, 'saveVisitor'])->name('save');    
+        Route::post('/save/visitor', [MembersController::class, 'saveVisitor'])->name('save');
+        Route::get('/edit/visitor/{visitor}', [MembersController::class, 'editVisitor'])->name('edit');
+        Route::post('/update/visitor/{visitor}', [MembersController::class, 'updateVisitor'])->name('update');
     });
 });
 

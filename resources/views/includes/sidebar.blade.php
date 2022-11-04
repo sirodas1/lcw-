@@ -28,7 +28,7 @@
                     Members 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                 </a>
-                <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
+                <a href="{{route('visitors.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
                     <span class="text-red-400"><i class="fa fa-user-plus"></i></span>&emsp; 
                     Visitors 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>

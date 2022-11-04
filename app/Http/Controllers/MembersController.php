@@ -13,21 +13,37 @@ use Log;
 class MembersController extends Controller
 {
     public function home()
-    {
-        if(auth()->user()->user_type == 'Admin')
-            $members = Member::paginate(20);
-        else
-            $members = auth()->user()->zones->catchments->load('members');
+    {   
+        if(request()->has('search')){
+            $search = request()->search;
+            if(auth()->user()->user_type == 'Admin')
+                $members = Member::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
+            else
+                $members = auth()->user()->zones->catchments->load('members')->where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search);
+        }else{
+            if(auth()->user()->user_type == 'Admin')
+                $members = Member::paginate(20);
+            else
+                $members = auth()->user()->zones->catchments->load('members');
+        }
 
         return view('members.home', compact('members'));
     }
 
     public function homeVisitors()
     {
-        if(auth()->user()->user_type == 'Admin')
-            $visitors = Visitor::paginate(20);
-        else
-            $visitors = auth()->user()->zones->catchments->load('visitors');
+        if(request()->has('search')){
+            $search = request()->search;
+            if(auth()->user()->user_type == 'Admin')
+                $visitors = Visitor::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
+            else
+                $visitors = auth()->user()->zones->catchments->load('visitors')->where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search);
+        }else{
+            if(auth()->user()->user_type == 'Admin')
+                $visitors = Visitor::paginate(20);
+            else
+                $visitors = auth()->user()->zones->catchments->load('visitors');
+        }
 
         return view('visitors.home', compact('visitors'));
     }
@@ -138,6 +154,109 @@ class MembersController extends Controller
     }
     public function saveVisitor(Request $request)
     {
-        
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'title' => 'required|string',
+            'gender' => 'required|string',
+            'dob' => 'required|date',
+            'marital_status' => 'required|string',
+            'occupation' => 'required|string',
+            'location' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('error_message', $validator->messages());
+            return back();
+        }
+
+        DB::beginTransaction();
+        try {
+            $array = $request->all();
+            if($request->baptized)
+                $array['baptized'] = true;
+            if($request->foundation_sch_status)
+                $array['foundation_sch_status'] = true;
+            if($request->sld_subscription)
+                $array['sld_subscription'] = true;
+            
+            Visitor::create($array);
+            DB::commit();
+            session()->flash('success_message', 'Visitor added successfully.');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            session()->flash('error_message', $ex->getMessage());
+            return redirect()->back();
+        }
+
+        return redirect()->route('visitors.home');
+    }
+    public function editVisitor(Visitor $visitor)
+    {
+        $catchments = Catchment::all();
+        $data = [
+            'visitor' => $visitor,
+            'catchments' => $catchments,
+        ];
+        return view('visitors.edit_visitor', $data);
+    }
+    public function updateVisitor(Request $request, Visitor $visitor)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'title' => 'required|string',
+            'gender' => 'required|string',
+            'dob' => 'required|date',
+            'marital_status' => 'required|string',
+            'occupation' => 'required|string',
+            'location' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('error_message', $validator->messages());
+            return back();
+        }
+
+        DB::beginTransaction();
+        try {
+            $array = $request->all();
+            if($request->baptized)
+                $array['baptized'] = true;
+            if($request->sld_subscription)
+                $array['sld_subscription'] = true;
+            
+            $visitor->update($array);
+            DB::commit();
+            session()->flash('success_message', 'Member updated successfully.');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            session()->flash('error_message', $ex->getMessage());
+            return redirect()->back();
+        }
+
+        return redirect()->route('visitors.home');
+    }
+    public function logAttendance(Visitor $visitor)
+    {
+        DB::beginTransaction();
+        try {
+            $visitor->attendance = $visitor->attendance + 1;
+            if($visitor->attendance < 5){
+                $visitor->save();
+                DB::commit();
+            }else{
+                $member = Member::create($visitor->attributesToArray());
+                $member->foundation_sch_status = true;
+                $member->save();
+                $visitor->delete();
+                DB::commit();
+                return redirect()->route('members.home');
+            }
+
+        } catch (\Exception $ex) {
+            DB::rollback();
+        }
+        return back();
     }
 }
