@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MembersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,22 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'home'])->name('home');
-        Route::post('/add/zone', [DashboardController::class, 'addZone'])->name('zone.add');    
+        Route::get('/zone/{zone}', [DashboardController::class, 'viewZone'])->name('zone.view');
+        Route::post('/add/zone', [DashboardController::class, 'addZone'])->name('zone.add');
+        Route::put('/edit/zone/{zone}', [DashboardController::class, 'editZone'])->name('zone.edit');
+        Route::post('/add/catchment/{zone}', [DashboardController::class, 'addCatchment'])->name('zone.catchment.add');
+        Route::put('/edit/catchment', [DashboardController::class, 'editCatchment'])->name('zone.catchment.edit');
+        Route::delete('/delete/catchment/{catchment}', [DashboardController::class, 'deleteCatchment'])->name('zone.catchment.delete');
+    });
+    Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
+        Route::get('/', [MembersController::class, 'home'])->name('home');
+        Route::get('/add/member', [MembersController::class, 'addMember'])->name('add');
+        Route::post('/save/member', [MembersController::class, 'saveMember'])->name('save');    
+    });
+    Route::group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
+        Route::get('/', [MembersController::class, 'home'])->name('homeVisitors');
+        Route::get('/add/visitor', [MembersController::class, 'addVisitor'])->name('add');
+        Route::post('/save/visitor', [MembersController::class, 'saveVisitor'])->name('save');    
     });
 });
 

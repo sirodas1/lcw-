@@ -5,7 +5,7 @@
     <div class="flex justify-between pl-2">
         <div class="px-0 py-4">
             @if ($back_check)
-                <a href="@yield('page-back')"><span class="h5 text-success"><i class="fa fa-chevron-left"></i></span></a>&emsp;
+                <a href="@yield('page-back')" class="text-red-400 hover:text-red-600"><span class="h5 text-success"><i class="fa fa-chevron-left"></i></span></a>&emsp;
             @endif
             <span class="text-xl text-gray-600"><strong>@yield('title')</strong></span>
         </div>

@@ -24,4 +24,9 @@ class Catchment extends Model
     {
         return $this->hasMany(Member::class, 'catchment_id');
     }
+
+    public function visitors()
+    {
+        return $this->hasMany(Visitor::class, 'catchment_id');
+    }
 }

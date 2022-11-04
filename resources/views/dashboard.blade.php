@@ -7,12 +7,12 @@
     </div>
     <div class="grid grid-cols-3 gap-6 mt-10 pl-5 pr-10">
         @foreach ($zones as $zone)
-            <x-zone-tab-option name="{{$zone->name}}" catchment="{{count($zone->catchments)}}" members="{{$zone->catchments->loadCount('members')->sum('members_count')}}" leader="{{$zone->leader->name ?? 'Unassigned'}}"/>
+            <x-zone-tab-option name="{{$zone->name}}" catchment="{{count($zone->catchments)}}" members="{{$zone->catchments->loadCount('members')->sum('members_count')}}" leader="{{$zone->leader->name ?? 'Unassigned'}}" onclick="window.location.href='{{route('dashboard.zone.view', ['zone' => $zone ])}}';"/>
         @endforeach
     </div>
     
     @push('modals')
-        <!-- Main modal -->
+        <!-- Add Zone modal -->
         <div id="addZone" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                 <!-- Modal content -->

@@ -23,7 +23,7 @@
                     Zone Heads 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                 </a>
-                <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
+                <a href="{{route('members.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
                     <span class="text-red-400"><i class="fa fa-user-group"></i></span>&emsp; 
                     Members 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
