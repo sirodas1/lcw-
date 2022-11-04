@@ -9,6 +9,8 @@ use App\Models\Catchment;
 use Validator;
 use DB;
 use Log;
+use App\Imports\MembersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MembersController extends Controller
 {
@@ -142,9 +144,11 @@ class MembersController extends Controller
         return redirect()->route('members.home');
     }
 
-    public function importMembers()
+    public function importMembers(Request $request)
     {
-        
+        Excel::import(new MembersImport,  $request->file('import_file'));
+
+        return redirect()->back();
     }
 
     public function addVisitor()

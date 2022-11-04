@@ -5,10 +5,15 @@
     <div class="w-6/12">
       <x-search-bar criteria="members"/>
     </div>
-    <div class="grid grid-cols-2 w-4/12 gap-4">
-      <button class="bg-red-400 text-white rounded-lg py-1 hover:bg-red-500"><i class="fa fa-upload"></i>&nbsp; Import Members</button>
-      <a href="{{route('members.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 hover:bg-red-500"><i class="fa fa-plus"></i>&nbsp; Add Member</a>
+    <div class="flex justify-end w-6/12 gap-4">
+      <a href="{{asset('templates/Members_Template.xlsx')}}" download="template.xlsx" class="text-sm text-indigo-300 hover:text-red-400 mt-2">Download Excel Template</a>
+      <a href="javascript: uploadSpreadSheet();" class="bg-red-400 text-center self-center text-white rounded-lg px-2 py-2 hover:bg-red-500"><i class="fa fa-upload"></i>&nbsp; Import</a>
+      <a href="{{route('members.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 px-2 hover:bg-red-500"><i class="fa fa-plus"></i>&nbsp; Add Member</a>
     </div>
+    <form id="importForm" action="{{route('members.import')}}" method="post" enctype="multipart/form-data">
+      @csrf
+      <input type="file" id="import_file" name="import_file" onchange="document.getElementById('importForm').submit();" hidden>
+    </form>
   </div>
   <div class="flex mt-10 pl-5 pr-10">
     @php
@@ -33,4 +38,12 @@
   <div class="flex justify-center mt-10 pl-5 pr-10">
     {{$members->links()}}
   </div>
+
+  @push('scripts')
+    <script>
+      function uploadSpreadSheet() {
+        document.getElementById('import_file').click();
+      }
+    </script>
+  @endpush
 </x-app-layout>

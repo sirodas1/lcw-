@@ -40,7 +40,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/add/member', [MembersController::class, 'addMember'])->name('add');
         Route::post('/save/member', [MembersController::class, 'saveMember'])->name('save');
         Route::get('/edit/member/{member}', [MembersController::class, 'editMember'])->name('edit');
-        Route::post('/update/member/{member}', [MembersController::class, 'updateMember'])->name('update');    
+        Route::post('/update/member/{member}', [MembersController::class, 'updateMember'])->name('update');
+        Route::post('/import/members', [MembersController::class, 'importMembers'])->name('import');
     });
     Route::group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
         Route::get('/', [MembersController::class, 'homeVisitors'])->name('home');
