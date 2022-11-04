@@ -20,15 +20,18 @@ class MembersController extends Controller
             $search = request()->search;
             if(auth()->user()->user_type == 'Admin')
                 $members = Member::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
-            else
-                $members = auth()->user()->zones->catchments->load('members')->where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search);
+            else{
+                $catchments = auth()->user()->zone->catchments->load('members');
+                return view('members.home', compact('catchments'));
+            }
         }else{
             if(auth()->user()->user_type == 'Admin')
                 $members = Member::paginate(20);
-            else
-                $members = auth()->user()->zones->catchments->load('members');
+            else{
+                $catchments = auth()->user()->zone->catchments->load('members');
+                return view('members.home', compact('catchments'));
+            }
         }
-
         return view('members.home', compact('members'));
     }
 
@@ -38,13 +41,17 @@ class MembersController extends Controller
             $search = request()->search;
             if(auth()->user()->user_type == 'Admin')
                 $visitors = Visitor::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
-            else
-                $visitors = auth()->user()->zones->catchments->load('visitors')->where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search);
+            else{
+                $catchments = auth()->user()->zone->catchments->load('visitors');
+                return view('visitors.home', compact('catchments'));
+            }
         }else{
             if(auth()->user()->user_type == 'Admin')
                 $visitors = Visitor::paginate(20);
-            else
-                $visitors = auth()->user()->zones->catchments->load('visitors');
+            else{
+                $catchments = auth()->user()->zone->catchments->load('visitors');
+                return view('visitors.home', compact('catchments'));
+            }
         }
 
         return view('visitors.home', compact('visitors'));
@@ -52,7 +59,10 @@ class MembersController extends Controller
 
     public function addMember()
     {
-        $catchments = Catchment::all();
+        if(auth()->user()->user_type == 'Admin')
+            $catchments = Catchment::all();
+        else
+            $catchments = auth()->user()->zone->catchments;
         return view('members.add_member', compact('catchments'));
     }
     public function saveMember(Request $request)
@@ -153,7 +163,10 @@ class MembersController extends Controller
 
     public function addVisitor()
     {
-        $catchments = Catchment::all();
+        if(auth()->user()->user_type == 'Admin')
+            $catchments = Catchment::all();
+        else
+            $catchments = auth()->user()->zone->catchments;
         return view('visitors.add_visitor', compact('catchments'));
     }
     public function saveVisitor(Request $request)

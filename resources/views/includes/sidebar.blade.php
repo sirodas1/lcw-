@@ -18,11 +18,13 @@
     <div class="mt-8 flex justify-center">
         <div class="basis-10/12">
             <div class="flex flex-col">
-                <a href="{{route('leaders.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
-                    <span class="text-red-400"><i class="fa fa-street-view"></i></span>&emsp; 
-                    Zone Heads 
-                    <span class="float-right"><i class="fa fa-chevron-right"></i></span>
-                </a>
+                @if (auth()->user()->user_type == 'Admin')
+                    <a href="{{route('leaders.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
+                        <span class="text-red-400"><i class="fa fa-street-view"></i></span>&emsp; 
+                        Zone Heads 
+                        <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                @endif
                 <a href="{{route('members.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
                     <span class="text-red-400"><i class="fa fa-user-group"></i></span>&emsp; 
                     Members 
@@ -33,11 +35,11 @@
                     Visitors 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                 </a>
-                <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
+                {{-- <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
                     <span class="text-red-400"><i class="fa fa-calendar-days"></i></span>&emsp; 
                     Programs 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>

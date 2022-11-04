@@ -12,11 +12,13 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        if(auth()->user()->user_type == 'Admin')
+        if(auth()->user()->user_type == 'Admin'){
             $zones = Zone::all();
-        else
-            $zones = auth()->user()->zones;
-        return view('dashboard', compact('zones'));
+            return view('dashboard', compact('zones'));
+        }else
+            $zone = auth()->user()->zone;
+
+        return view('dashboard', compact('zone'));
     }
 
     public function addZone(Request $request)
