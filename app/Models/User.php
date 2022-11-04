@@ -36,9 +36,9 @@ class User extends Authenticatable
         return $this->belongsTo(Member::class, 'member_id');
     }
 
-    public function zones()
+    public function zone()
     {
-        return $this->hasMany(Zone::class, 'leader_id');
+        return $this->hasOne(Zone::class, 'leader_id');
     }
 
     public function callLogs()

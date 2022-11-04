@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\ZoneLeadersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/add/catchment/{zone}', [DashboardController::class, 'addCatchment'])->name('zone.catchment.add');
         Route::put('/edit/catchment', [DashboardController::class, 'editCatchment'])->name('zone.catchment.edit');
         Route::delete('/delete/catchment/{catchment}', [DashboardController::class, 'deleteCatchment'])->name('zone.catchment.delete');
+    });
+    Route::group(['prefix' => 'leaders', 'as' => 'leaders.'], function () {
+        Route::get('/', [ZoneLeadersController::class, 'home'])->name('home');
+        Route::post('/save/leader', [ZoneLeadersController::class, 'saveLeader'])->name('save');
+        Route::put('/update/leader', [ZoneLeadersController::class, 'updateLeader'])->name('update');
     });
     Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
         Route::get('/', [MembersController::class, 'home'])->name('home');

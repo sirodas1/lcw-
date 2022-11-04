@@ -17,11 +17,11 @@
     <x-table :headings="$headings">
       @foreach ($members as $member)
         @if ($loop->odd)
-          <tr class="group bg-white border-b border-red-300 hover:bg-red-200 hover:text-white hover:cursor-pointer" onclick="window.location.href='{{route('members.edit', [$member])}}';">
+          <tr class="group bg-white border-b border-red-300 hover:bg-gray-50 hover:cursor-pointer" onclick="window.location.href='{{route('members.edit', [$member])}}';">
         @else
-          <tr class="group bg-red-50 border-b border-red-300 hover:bg-red-200 hover:text-white hover:cursor-pointer" onclick="window.location.href='{{route('members.edit', [$member])}}';">
+          <tr class="group bg-red-50 border-b border-red-300 hover:bg-red-100 hover:cursor-pointer" onclick="window.location.href='{{route('members.edit', [$member])}}';">
         @endif
-          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap group-hover:text-white">{{$member->firstname.' '.$member->lastname.' '.$member->othername}}</th>
+          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">{{$member->firstname.' '.$member->lastname.' '.$member->othername}}</th>
           <td class="py-4 px-6">{{$member->phone_number}}</td>
           <td class="py-4 px-6">{{$member->occupation}}</td>
           <td class="py-4 px-6">{{$member->catchment->zone->name ?? 'No Zone Assigned'}}</td>

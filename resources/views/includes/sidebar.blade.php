@@ -18,7 +18,7 @@
     <div class="mt-8 flex justify-center">
         <div class="basis-10/12">
             <div class="flex flex-col">
-                <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
+                <a href="{{route('leaders.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
                     <span class="text-red-400"><i class="fa fa-street-view"></i></span>&emsp; 
                     Zone Heads 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>

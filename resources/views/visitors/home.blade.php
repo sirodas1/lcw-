@@ -16,11 +16,11 @@
     <x-table :headings="$headings">
       @foreach ($visitors as $visitor)
         @if ($loop->odd)
-          <tr class="group bg-white border-b border-red-300 hover:bg-red-200 hover:text-white hover:cursor-pointer" onclick="window.location.href='{{route('visitors.edit', [$visitor])}}';">
+          <tr class="group bg-white border-b border-red-300 hover:bg-gray-50 hover:cursor-pointer" onclick="window.location.href='{{route('visitors.edit', [$visitor])}}';">
         @else
-          <tr class="group bg-red-50 border-b border-red-300 hover:bg-red-200 hover:text-white hover:cursor-pointer" onclick="window.location.href='{{route('visitors.edit', [$visitor])}}';">
+          <tr class="group bg-red-50 border-b border-red-300 hover:bg-red-100 hover:cursor-pointer" onclick="window.location.href='{{route('visitors.edit', [$visitor])}}';">
         @endif
-          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap group-hover:text-white">{{$visitor->firstname.' '.$visitor->lastname.' '.$visitor->othername}}</th>
+          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">{{$visitor->firstname.' '.$visitor->lastname.' '.$visitor->othername}}</th>
           <td class="py-4 px-6">{{$visitor->phone_number}}</td>
           <td class="py-4 px-6">{{$visitor->occupation}}</td>
           <td class="py-4 px-6">
