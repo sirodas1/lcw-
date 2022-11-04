@@ -1,1 +1,2 @@
-<input type="checkbox" {{ $attributes->merge(['class' => 'shadow-sm border-red-300 focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 text-red-400 rounded'])}}/>
+@props(['chck' => false])
+<input type="checkbox" {{ $attributes->merge(['class' => 'shadow-sm border-red-300 focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50 text-red-400 rounded'])}} @checked($chck)/>

@@ -32,7 +32,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['prefix' => 'members', 'as' => 'members.'], function () {
         Route::get('/', [MembersController::class, 'home'])->name('home');
         Route::get('/add/member', [MembersController::class, 'addMember'])->name('add');
-        Route::post('/save/member', [MembersController::class, 'saveMember'])->name('save');    
+        Route::post('/save/member', [MembersController::class, 'saveMember'])->name('save');
+        Route::get('/edit/member/{member}', [MembersController::class, 'editMember'])->name('edit');
+        Route::post('/update/member/{member}', [MembersController::class, 'updateMember'])->name('update');    
     });
     Route::group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
         Route::get('/', [MembersController::class, 'home'])->name('homeVisitors');
