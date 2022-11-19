@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Zone;
 use App\Models\Catchment;
+use App\Models\Member;
+use App\Models\Report;
+use App\Models\SundayAttendance;
+use App\Models\SundayAttendanceVisitor;
 use DB;
 use Log;
 
@@ -14,11 +18,97 @@ class DashboardController extends Controller
     {
         if(auth()->user()->user_type == 'Admin'){
             $zones = Zone::all();
-            return view('dashboard', compact('zones'));
-        }else
-            $zone = auth()->user()->zone;
+            $statistics = $this->calculateMemberStatistics();
+            $attendance = $this->calStatsTable();
+            $new_reports = Report::where('status', false)->get();
+            return view('dashboard_admin', compact('zones', 'statistics', 'attendance', 'new_reports'));
+        }
 
-        return view('dashboard', compact('zone'));
+        $zone = auth()->user()->zone;
+        $statistics = $this->calMemStatsForZoneLeaders($zone);
+        $report_ready = false;
+        if (date('l') == "Sunday") {
+            $date = date('Y-m-d');
+            $report = Report::where('sunday_date', $date)->firstOr(function(){
+                return null;
+            });
+            if (!isset($report)) {
+                $report_ready = true;
+            }
+        }
+
+        return view('dashboard_zone_leader', compact('zone', 'statistics', 'report_ready'));
+    }
+
+    private function calStatsTable()
+    {
+        $last_sunday = date('Y-m-d',strtotime('last sunday'));
+        //Number of Members in Attendance
+        $members_attendence = SundayAttendance::where('sunday_date', $last_sunday)->where('attendance', true)->count();
+        //Number of Visitors in Attendance
+        $visitors_attendence = SundayAttendanceVisitor::where('sunday_date', $last_sunday)->count();
+
+        $number_fs_completed = Member::where('foundation_sch_status', true)->count();
+        $number_fs_uncompleted = Member::where('foundation_sch_status', false)->count();
+        $attendance = [
+            'Last Sunday Church Members Attendance' => $members_attendence,
+            'Last Sunday Visitors Attendance' => $visitors_attendence,
+            'Number of Members who Completed Foundation Sch.' => $number_fs_completed,
+            'Number of Members who are still in Foundation Sch.' => $number_fs_uncompleted,
+        ];
+
+        return $attendance;
+    }
+
+    private function calculateMemberStatistics()
+    {
+        $members = Member::all();
+        $statistics = [];
+        //Total Number of members;
+        $statistics[] = [
+            'name' => 'Total Members',
+            'number' => $members->count(),
+            'link' => route('members.home'),
+        ];
+        //Total Number of male members;
+        $statistics[] = [
+            'name' => 'Male Members',
+            'number' => $members->where('gender', 'Male')->count(),
+        ];
+        //Total Number of female members;
+        $statistics[] = [
+            'name' => 'Females Members',
+            'number' => $members->where('gender', 'Female')->count(),
+        ];
+        //Total Number of baptized members;
+        $statistics[] = [
+            'name' => 'Baptized Members',
+            'number' => $members->where('baptized', true)->count(),
+        ];
+        //Total Number of unbaptized members;
+        $statistics[] = [
+            'name' => 'Unbaptized Members',
+            'number' => $members->where('baptized', false )->count(),
+        ];
+
+        return $statistics;
+    }
+
+    private function calMemStatsForZoneLeaders($zone)
+    {
+        $statistics = [];
+        //Assigned of members;
+        $statistics[] = [
+            'name' => 'Assigned Members',
+            'number' => $zone->catchments->loadCount('members')->sum('members_count'),
+        ];
+        //Assigned of visitors;
+        $statistics[] = [
+            'name' => 'Assigned Visitors',
+            'number' => $zone->catchments->loadCount('visitors')->sum('visitors_count'),
+        ];
+        
+        return $statistics;
     }
 
     public function addZone(Request $request)
@@ -61,7 +151,10 @@ class DashboardController extends Controller
 
     public function viewZone(Zone $zone)
     {
-        return view('zone-details', compact('zone'));
+        if (auth()->user()->user_type == "Admin") 
+            return view('zone-details', compact('zone'));
+        else 
+            return view('zone-details-leader', compact('zone'));
     }
 
     public function addCatchment(Request $request, Zone $zone)

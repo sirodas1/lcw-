@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CallCheckupLog::class, 'user_id');
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'leader_id');
+    }
 }

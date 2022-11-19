@@ -35,11 +35,18 @@
                     Visitors 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                 </a>
-                {{-- <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
-                    <span class="text-red-400"><i class="fa fa-calendar-days"></i></span>&emsp; 
-                    Programs 
+                {{-- @if (auth()->user()->user_type == 'Admin')
+                    <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
+                        <span class="text-red-400"><i class="fa fa-calendar-days"></i></span>&emsp; 
+                        Programs 
+                        <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                @endif --}}
+                <a href="{{route('reports.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
+                    <span class="text-red-400"><i class="fa fa-file-invoice"></i></span>&emsp; 
+                    Reports 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
-                </a> --}}
+                </a>
             </div>
         </div>
     </div>

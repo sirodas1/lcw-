@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\ZoneLeadersController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +47,20 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::group(['prefix' => 'visitors', 'as' => 'visitors.'], function () {
         Route::get('/', [MembersController::class, 'homeVisitors'])->name('home');
         Route::get('/log/attendance/{visitor}', [MembersController::class, 'logAttendance'])->name('log.attendance');
+        Route::get('/log/attendance/{visitor}/add/member', [MembersController::class, 'logAttendanceAddMember'])->name('log.attendance.add.member');
         Route::get('/add/visitor', [MembersController::class, 'addVisitor'])->name('add');
         Route::post('/save/visitor', [MembersController::class, 'saveVisitor'])->name('save');
         Route::get('/edit/visitor/{visitor}', [MembersController::class, 'editVisitor'])->name('edit');
         Route::post('/update/visitor/{visitor}', [MembersController::class, 'updateVisitor'])->name('update');
+    });
+    Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
+        Route::get('',[ReportsController::class, 'home'])->name('home');
+        Route::get('add',[ReportsController::class, 'addReport'])->name('add');
+        Route::post('save',[ReportsController::class, 'saveReport'])->name('save');
+        Route::get('edit/{report}',[ReportsController::class, 'editReport'])->name('edit');
+        Route::post('update/{report}',[ReportsController::class, 'updateReport'])->name('update');
+        Route::get('view/{report}',[ReportsController::class, 'viewReport'])->name('view');
+        Route::get('reviewed/{report}',[ReportsController::class, 'reviewedReport'])->name('reviewed');
     });
 });
 

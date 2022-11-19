@@ -9,9 +9,7 @@
         <span class="text-base text-gray-600 font-semibold">Zone Leader : </span>&emsp;
         <span class="text-base text-red-500">{{$zone->leader->name ?? 'Unassigned'}}</span>
       </div>
-      @if (auth()->user()->user_type == 'Admin')
-        <button type="button" class="bg-red-400 rounded-md text-white hover:bg-red-500 py-1 w-44" data-modal-toggle="editZone"><i class="fa fa-edit"></i>&nbsp;Edit Zone</button>
-      @endif
+      <button type="button" class="bg-red-400 rounded-md text-white hover:bg-red-500 py-1 w-44" data-modal-toggle="editZone"><i class="fa fa-edit"></i>&nbsp;Edit Zone</button>
     </div>
   </div>
 

@@ -14,8 +14,8 @@
 
             <!-- Email Address -->
             <div class="mt-5 px-8">
-                <div class="flex flex-row group bg-red-400 hover:bg-red-600 focus:bg-red-600 rounded-l-full rounded-r-full px-8 py-2" style="">
-                    <div class="basis-1/12 mt-2">
+                <div class="flex flex-row group bg-red-400 hover:bg-red-600 focus:bg-red-600 rounded-l-full rounded-r-full px-8 py-1" style="">
+                    <div class="basis-1/12 mt-3">
                       <img src="/img/id-card@2x.png" class="self-center w-full h-auto">
                     </div>
                     <div class="basis-11/12 ml-2 px-0">
@@ -27,8 +27,8 @@
 
             <!-- Password -->
             <div class="mt-6 px-8">
-                <div class="flex flex-row group bg-red-400 hover:bg-red-600 focus:bg-red-600 rounded-l-full rounded-r-full px-8 py-2">
-                    <div class="basis-1/12 mt-2">
+                <div class="flex flex-row group bg-red-400 hover:bg-red-600 focus:bg-red-600 rounded-l-full rounded-r-full px-8 py-1">
+                    <div class="basis-1/12 mt-3">
                         <img src="/img/padlock@2x.png" class="self-center w-9/12 h-auto">
                     </div>
                     <div class="basis-11/12 ml-2 px-0">

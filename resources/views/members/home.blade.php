@@ -1,6 +1,12 @@
 <x-app-layout>
   @section('title', 'Members')
 
+@if (session()->has('new_member'))
+  <div id="new_member_added" class="flex justify-between my-6 mr-5 px-2 py-1 border border-green-500 rounded">
+    <span class="text-base font-semibold text-green-500">{{session()->get('new_member')}}</span>
+    <i class="fa fa-close text-gray-600 hover:text-red-600 hover:cursor-pointer pt-1" onclick="document.getElementById('new_member_added').remove();"></i>
+  </div>  
+@endif
 @if (auth()->user()->user_type == 'Admin')
   <div class="flex justify-between mt-12 pl-3 pr-6">
     <div class="w-6/12">

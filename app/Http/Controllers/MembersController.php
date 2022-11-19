@@ -22,14 +22,14 @@ class MembersController extends Controller
                 $members = Member::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
             else{
                 $catchments = auth()->user()->zone->catchments->load('members');
-                return view('members.home', compact('catchments'));
+                return view('members.home_zone_leader', compact('catchments'));
             }
         }else{
             if(auth()->user()->user_type == 'Admin')
                 $members = Member::paginate(20);
             else{
                 $catchments = auth()->user()->zone->catchments->load('members');
-                return view('members.home', compact('catchments'));
+                return view('members.home_zone_leader', compact('catchments'));
             }
         }
         return view('members.home', compact('members'));
@@ -43,14 +43,14 @@ class MembersController extends Controller
                 $visitors = Visitor::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
             else{
                 $catchments = auth()->user()->zone->catchments->load('visitors');
-                return view('visitors.home', compact('catchments'));
+                return view('visitors.home_zone_leader', compact('catchments'));
             }
         }else{
             if(auth()->user()->user_type == 'Admin')
                 $visitors = Visitor::paginate(20);
             else{
                 $catchments = auth()->user()->zone->catchments->load('visitors');
-                return view('visitors.home', compact('catchments'));
+                return view('visitors.home_zone_leader', compact('catchments'));
             }
         }
 
@@ -93,9 +93,9 @@ class MembersController extends Controller
             if($request->sld_subscription)
                 $array['sld_subscription'] = true;
             
-            Member::create($array);
+            $member = Member::create($array);
             DB::commit();
-            session()->flash('success_message', 'Member added successfully.');
+            session()->flash('new_member', $member->firstname.' '.$member->lastname.' has been added as a new member of the Church.');
         } catch (\Exception $ex) {
             DB::rollback();
             session()->flash('error_message', $ex->getMessage());
@@ -259,21 +259,28 @@ class MembersController extends Controller
         DB::beginTransaction();
         try {
             $visitor->attendance = $visitor->attendance + 1;
-            if($visitor->attendance < 5){
-                $visitor->save();
-                DB::commit();
-            }else{
-                $member = Member::create($visitor->attributesToArray());
-                $member->foundation_sch_status = true;
-                $member->save();
-                $visitor->delete();
-                DB::commit();
-                return redirect()->route('members.home');
-            }
-
+            $visitor->save();
+            DB::commit();
         } catch (\Exception $ex) {
             DB::rollback();
         }
         return back();
+    }
+
+    public function logAttendanceAddMember(Visitor $visitor)
+    {
+        DB::beginTransaction();
+        try {
+            $visitor->attendance = $visitor->attendance + 1;
+            $member = Member::create($visitor->attributesToArray());
+            $member->foundation_sch_status = true;
+            $member->save();
+            $visitor->delete();
+            DB::commit();
+            session()->flash('new_member','Visitor '.$member->firstname.' '.$member->lastname.' has been added as a new member of the Church.');
+        } catch (\Exception $ex) {
+            DB::rollback();
+        }
+        return redirect()->route('members.home');
     }
 }
