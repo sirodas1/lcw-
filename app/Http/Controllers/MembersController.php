@@ -16,14 +16,29 @@ class MembersController extends Controller
 {
     public function home()
     {   
+        if(request()->has('filter')){
+            $filter = request()->filter;
+            // dd($filter);
+            if($filter == "all"){
+                return redirect()->route('members.home');
+            }elseif($filter == "pastors"){
+                $members = Member::where('title', 'Pastor')->orWhere('title', 'E-Pastor')->paginate(20);
+            }elseif ($filter == "deacon") {
+                $members = Member::where('title', ['Deacon', 'Deaconess'])->paginate(20);
+            }elseif ($filter == "stewards") {
+                $members = Member::where('title', 'Steward')->paginate(20);
+            }elseif ($filter == "baptized") {
+                $members = Member::where('baptized', true)->paginate(20);
+            }elseif ($filter == "fds") {
+                $members = Member::where('foundation_sch_status', true)->paginate(20);
+            }
+            return view('members.home', compact('members','filter'));
+        }
+
         if(request()->has('search')){
             $search = request()->search;
             if(auth()->user()->user_type == 'Admin')
                 $members = Member::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
-            else{
-                $catchments = auth()->user()->zone->catchments->load('members');
-                return view('members.home_zone_leader', compact('catchments'));
-            }
         }else{
             if(auth()->user()->user_type == 'Admin')
                 $members = Member::paginate(20);
@@ -41,10 +56,6 @@ class MembersController extends Controller
             $search = request()->search;
             if(auth()->user()->user_type == 'Admin')
                 $visitors = Visitor::where('firstname', $search)->orWhere('lastname', $search)->orWhere('othername', $search)->paginate(20);
-            else{
-                $catchments = auth()->user()->zone->catchments->load('visitors');
-                return view('visitors.home_zone_leader', compact('catchments'));
-            }
         }else{
             if(auth()->user()->user_type == 'Admin')
                 $visitors = Visitor::paginate(20);

@@ -22,9 +22,32 @@
       <input type="file" id="import_file" name="import_file" onchange="document.getElementById('importForm').submit();" hidden>
     </form>
   </div>
+  <div class="flex justify-end mt-5 pl-3 pr-6">
+    <form id="filterForm" action="{{route('members.home')}}" method="get">
+      @csrf
+      <div class="">
+        <x-select-option id="filterSelect" name="filter" onchange="document.getElementById('filterForm').submit();">
+          <option value="all">All Members</option>
+          @isset($filter)
+            <option @selected($filter == "pastors") value="pastors">Pastors/E-Pastors</option>
+            <option @selected($filter == "deacon") value="deacon">Deacon/Deaconess</option>
+            <option @selected($filter == "stewards") value="stewards">Stewards</option>
+            <option @selected($filter == "baptized") value="baptized">Baptized</option>
+            <option @selected($filter == "fds") value="fds">Completed Foud. Sch.</option>
+          @else
+            <option value="pastors">Pastors/E-Pastors</option>
+            <option value="deacon">Deacon/Deaconess</option>
+            <option value="stewards">Stewards</option>
+            <option value="baptized">Baptized</option>
+            <option value="fds">Completed Foud. Sch.</option>
+          @endisset
+        </x-select-option>
+      </div>
+    </form>
+  </div>
   <div class="flex mt-10 pl-5 pr-10">
     @php
-      $headings = ['Fullname', 'Phone Number', 'Occupation', 'Zone', 'Baptized'];
+      $headings = ['Fullname', 'Title', 'Phone Number', 'Occupation', 'Zone', 'Baptized', 'Fds.'];
     @endphp
     <x-table :headings="$headings">
       @foreach ($members as $member)
@@ -34,10 +57,12 @@
           <tr class="group bg-red-50 border-b border-red-300 hover:bg-red-100 hover:cursor-pointer" onclick="window.location.href='{{route('members.edit', [$member])}}';">
         @endif
           <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">{{$member->firstname.' '.$member->lastname.' '.$member->othername}}</th>
+          <td class="py-4 px-6">{{$member->title}}</td>
           <td class="py-4 px-6">{{$member->phone_number}}</td>
           <td class="py-4 px-6">{{$member->occupation}}</td>
           <td class="py-4 px-6">{{$member->catchment->zone->name ?? 'No Zone Assigned'}}</td>
-          <td class="py-4 px-6">{{$member->baptized ? 'Yes' : 'No'}}</td>
+          <td class="py-4 px-6 text-center">{{$member->baptized ? 'Yes' : 'No'}}</td>
+          <td class="py-4 px-6 text-center">{{$member->foundation_sch_status ? 'Yes' : 'No'}}</td>
         </tr>
       @endforeach
     </x-table> 
