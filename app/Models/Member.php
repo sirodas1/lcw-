@@ -12,8 +12,13 @@ class Member extends Model
     protected $table = 'members';
 
     protected $fillable = [
-        'catchment_id', 'firstname', 'lastname', 'othername', 'title', 'position', 'gender', 'dob', 'marital_status', 'previous_church_bg', 'phone_number', 'whatsapp_number', 'occupation', 'location', 'invited_by', 'any_relations', 'baptized', 'foundation_sch_status', 'sld_subscription',
+        'catchment_id', 'firstname', 'lastname', 'othername', 'title', 'position', 'gender', 'dob', 'marital_status', 'previous_church_bg', 'phone_number', 'whatsapp_number', 'occupation', 'location', 'invited_by', 'any_relations', 'relation_id', 'baptized', 'foundation_sch_status', 'sld_subscription',
     ];
+
+    public function related_member()
+    {
+        return $this->belongsTo(Member::class, 'relation_id');
+    }
 
     public function catchment()
     {

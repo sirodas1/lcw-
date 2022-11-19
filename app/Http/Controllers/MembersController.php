@@ -70,11 +70,12 @@ class MembersController extends Controller
 
     public function addMember()
     {
+        $members = Member::all();
         if(auth()->user()->user_type == 'Admin')
             $catchments = Catchment::all();
         else
             $catchments = auth()->user()->zone->catchments;
-        return view('members.add_member', compact('catchments'));
+        return view('members.add_member', compact('catchments', 'members'));
     }
     public function saveMember(Request $request)
     {
@@ -97,6 +98,8 @@ class MembersController extends Controller
         DB::beginTransaction();
         try {
             $array = $request->all();
+            if($request->any_relations == 'null')
+                $array['any_relations'] = null;
             if($request->baptized)
                 $array['baptized'] = true;
             if($request->foundation_sch_status)
@@ -118,8 +121,10 @@ class MembersController extends Controller
 
     public function editMember(Member $member)
     {
+        $members = Member::all();
         $catchments = Catchment::all();
         $data = [
+            'members' => $members,
             'member' => $member,
             'catchments' => $catchments,
         ];
@@ -146,6 +151,8 @@ class MembersController extends Controller
         DB::beginTransaction();
         try {
             $array = $request->all();
+            if($request->any_relations == 'null')
+                $array['any_relations'] = null;
             if($request->baptized)
                 $array['baptized'] = true;
             if($request->foundation_sch_status)
@@ -174,11 +181,12 @@ class MembersController extends Controller
 
     public function addVisitor()
     {
+        $members = Member::all();
         if(auth()->user()->user_type == 'Admin')
             $catchments = Catchment::all();
         else
             $catchments = auth()->user()->zone->catchments;
-        return view('visitors.add_visitor', compact('catchments'));
+        return view('visitors.add_visitor', compact('catchments', 'members'));
     }
     public function saveVisitor(Request $request)
     {
@@ -201,6 +209,8 @@ class MembersController extends Controller
         DB::beginTransaction();
         try {
             $array = $request->all();
+            if($request->any_relations == 'null')
+                $array['any_relations'] = null;
             if($request->baptized)
                 $array['baptized'] = true;
             if($request->foundation_sch_status)
@@ -221,8 +231,10 @@ class MembersController extends Controller
     }
     public function editVisitor(Visitor $visitor)
     {
+        $members = Member::all();
         $catchments = Catchment::all();
         $data = [
+            'members' => $members,
             'visitor' => $visitor,
             'catchments' => $catchments,
         ];
@@ -249,6 +261,8 @@ class MembersController extends Controller
         DB::beginTransaction();
         try {
             $array = $request->all();
+            if($request->any_relations == 'null')
+                $array['any_relations'] = null;
             if($request->baptized)
                 $array['baptized'] = true;
             if($request->sld_subscription)

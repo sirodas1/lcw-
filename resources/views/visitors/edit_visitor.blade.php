@@ -105,8 +105,8 @@
       <div class="flex gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col w-4/12">
           <x-input-label for="any_relations">Any Relations in the Church * :</x-input-label>
-          <x-select-option name="any_relations">
-            <option></option>
+          <x-select-option id="any_relations" name="any_relations" onchange="toggleRelationDiv('any_relations')">
+            <option value="null">No One</option>
             <option @selected($visitor->any_relations == 'Parent')>Parent</option>
             <option @selected($visitor->any_relations == 'Sibling')>Sibling</option>
             <option @selected($visitor->any_relations == 'Friend')>Friend</option>
@@ -121,6 +121,16 @@
           <x-input-label for="sld_subscription" class="mt-7">&nbsp;&nbsp;SLD Subscription? </x-input-label>
         </div>
       </div>
+      <div id="related_id_div" class="grid grid-cols-3 gap-6 px-6 mb-5 {{isset($visitor->any_relations)?'':'hidden'}}">
+        <div class="flex justify-start flex-col">
+          <x-input-label for="relation_id">Select Relation in the Church:</x-input-label>
+          <x-select-option id="related_id" name="relation_id" :disabled="(isset($visitor->any_relations)?false:true)">
+            @foreach ($members as $member)
+              <option  @selected($visitor->relation_id == $member->id) value="{{$member->id}}">{{$member->firstname.' '.$member->lastname.' '.$member->othername}}</option>
+            @endforeach
+          </x-select-option>
+        </div>
+      </div>
       <div class="flex justify-center gap-6 px-6 my-10">
         <div class="w-5/12">
           <x-primary-button>Update Visitor</x-primary-button>
@@ -128,4 +138,21 @@
       </div>
     </form>
   </div>
+
+  @push('scripts')
+    <script>
+      function toggleRelationDiv(elementID) {
+        var any_relations_select = document.getElementById(elementID);
+        var related_id_div = document.getElementById('related_id_div');
+        var related_id_select = document.getElementById('related_id');
+        if(any_relations_select.value != 'null'){
+          related_id_div.classList.remove('hidden');
+          related_id_select.disabled = false;
+        }else{
+          related_id_div.classList.add('hidden');
+          related_id_select.disabled = true;
+        }
+      }
+    </script>
+  @endpush
 </x-app-layout>
