@@ -20,11 +20,9 @@
           <th scope="1" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">{{date("l d F Y",strtotime($report->sunday_date))}}</th>
           <td scope="2" class="py-4 px-6">{{$report->zone_leader->zone->name}}</td>
           <td scope="2" class="py-4 px-6 {{$report->status ? 'text-green-400' : 'text-red-400'}}">{{$report->status ? 'REVIEWED' : 'PENDING'}}</td>
-          @if (!$report->status)
-            <td class="text-center">
-              <a href="{{route('reports.view', [$report])}}" class="text-gray-500 hover:text-green-400"><i class="fa fa-search"></i></a>
-            </td>
-          @endif
+          <td class="text-center">
+            <a href="{{route('reports.view', [$report])}}" class="text-gray-500 hover:text-green-400"><i class="fa fa-search"></i></a>
+          </td>
         </tr>  
       @endforeach
     </x-table> 

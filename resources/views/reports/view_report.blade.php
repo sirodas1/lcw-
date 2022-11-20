@@ -3,9 +3,15 @@
   @section('back-check', true)
   @section('page-back', route('reports.home'))
 
-  <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-20 mb-10">
+  <div class="flex justify-end mt-8 mr-20">
+    <button class="text-white bg-red-400 rounded hover:bg-red-500 p-2" onclick="printDiv();">Print</button>
+  </div>
+  <div id="printableDiv" class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-8 ml-5 mr-20 mb-10">
     <div class="flex justify-center mt-12 px-6">
-      <span class="text-red-600 text-lg">Add New Sunday Report</span>
+      <span class="text-red-600 text-lg font-semibold">{{strtoupper($report->zone_leader->zone->name)}}</span>
+    </div>
+    <div class="flex justify-center px-6">
+      <span class="text-gray-500 text-sm font-semibold">REPORT DETAILS</span>
     </div>
     @if(session()->has('error_message'))
       <div class="flex justify-center mt-12 px-6">
@@ -110,7 +116,23 @@
     </div>
     <div class="grid grid-cols-3 gap-6 px-6 mb-5"></div>
     <div class="flex justify-center gap-6 px-6 my-10">
-      <a href="{{route('reports.reviewed', [$report])}}" class="bg-blue-600 rounded-lg text-gray-100 hover:bg-blue-500 py-2 self-center items-center text-center w-5/12">Reviewed</a>
+      @if (!$report->status)
+        <a href="{{route('reports.reviewed', [$report])}}" class="bg-blue-600 rounded-lg text-gray-100 hover:bg-blue-500 py-2 self-center items-center text-center w-5/12">Reviewed</a>
+      @else
+        <span class="text-lg text-center text-blue-600 font-semibold">REVIEWED</span>
+      @endif
     </div>
   </div>
+
+  @push('scripts')
+    <script>
+      function printDiv() {
+        var printContents = document.getElementById("printableDiv").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+      }
+    </script>
+  @endpush
 </x-app-layout>
