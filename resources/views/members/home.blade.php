@@ -29,16 +29,22 @@
         <x-select-option id="filterSelect" name="filter" onchange="document.getElementById('filterForm').submit();">
           <option value="all">All Members</option>
           @isset($filter)
+            <option @selected($filter == "male") value="male">Male</option>
+            <option @selected($filter == "female") value="female">Female</option>
             <option @selected($filter == "pastors") value="pastors">Pastors/E-Pastors</option>
             <option @selected($filter == "deacon") value="deacon">Deacon/Deaconess</option>
             <option @selected($filter == "stewards") value="stewards">Stewards</option>
             <option @selected($filter == "baptized") value="baptized">Baptized</option>
+            <option @selected($filter == "unbaptized") value="unbaptized">Unbaptized</option>
             <option @selected($filter == "fds") value="fds">Completed Foud. Sch.</option>
           @else
+            <option value="male">Male</option>
+            <option value="female">Female</option>
             <option value="pastors">Pastors/E-Pastors</option>
             <option value="deacon">Deacon/Deaconess</option>
             <option value="stewards">Stewards</option>
             <option value="baptized">Baptized</option>
+            <option value="unbaptized">Unbaptized</option>
             <option value="fds">Completed Foud. Sch.</option>
           @endisset
         </x-select-option>

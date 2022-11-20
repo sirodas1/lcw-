@@ -74,21 +74,25 @@ class DashboardController extends Controller
         $statistics[] = [
             'name' => 'Male Members',
             'number' => $members->where('gender', 'Male')->count(),
+            'link' => route('members.home', ['filter' => 'male']),
         ];
         //Total Number of female members;
         $statistics[] = [
             'name' => 'Females Members',
             'number' => $members->where('gender', 'Female')->count(),
+            'link' => route('members.home', ['filter' => 'female']),
         ];
         //Total Number of baptized members;
         $statistics[] = [
             'name' => 'Baptized Members',
             'number' => $members->where('baptized', true)->count(),
+            'link' => route('members.home', ['filter' => 'baptized']),
         ];
         //Total Number of unbaptized members;
         $statistics[] = [
             'name' => 'Unbaptized Members',
             'number' => $members->where('baptized', false )->count(),
+            'link' => route('members.home', ['filter' => 'unbaptized']),
         ];
 
         return $statistics;

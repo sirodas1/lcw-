@@ -21,6 +21,10 @@ class MembersController extends Controller
             // dd($filter);
             if($filter == "all"){
                 return redirect()->route('members.home');
+            }elseif($filter == "male"){
+                $members = Member::where('gender', 'Male')->paginate(20);
+            }elseif($filter == "female"){
+                $members = Member::where('gender', 'Female')->paginate(20);
             }elseif($filter == "pastors"){
                 $members = Member::where('title', 'Pastor')->orWhere('title', 'E-Pastor')->paginate(20);
             }elseif ($filter == "deacon") {
@@ -29,6 +33,8 @@ class MembersController extends Controller
                 $members = Member::where('title', 'Steward')->paginate(20);
             }elseif ($filter == "baptized") {
                 $members = Member::where('baptized', true)->paginate(20);
+            }elseif ($filter == "unbaptized") {
+                $members = Member::where('baptized', false)->paginate(20);
             }elseif ($filter == "fds") {
                 $members = Member::where('foundation_sch_status', true)->paginate(20);
             }

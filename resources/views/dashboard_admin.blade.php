@@ -1,9 +1,9 @@
 <x-app-layout>
     @section('title', 'Dashboard')
 
-    @isset($new_reports)
+    @if(isset($new_reports) && $new_reports->isNotEmpty())
         <div class="flex justify-start mt-12 pl-3 pr-6">
-            <span class="text-lg text-gray-700 font pt-2">Members Statistics</span>
+            <span class="text-lg text-gray-700 font pt-2">Notifications</span>
         </div>
         @foreach ($new_reports as $report)
             <div id="new_member_added" class="flex justify-between my-6 mr-20 ml-5 px-2 py-1 border border-green-500 rounded">
@@ -11,7 +11,7 @@
                 <a class="mt-1 text-xs text-red-400 hover:text-green-400 hover:cursor-pointer" href="{{route('reports.view', [$report])}}">View Report</a>
             </div>
         @endforeach
-    @endisset
+    @endif
 
     <div class="flex justify-start mt-12 pl-3 pr-6">
         <span class="text-lg text-gray-700 font pt-2">Members Statistics</span>
