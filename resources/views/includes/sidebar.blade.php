@@ -2,9 +2,9 @@
     <div class="flex justify-center mt-2">
         <img src="{{asset('img/logo.png')}}" class="self-center h-auto w-48">
     </div>
-    <div class="flex justify-center border-2 border-red-200 rounded mx-5 my-5">
-        <span class="text-gray-600 text-sm">{{auth()->user()->name}}</span>&nbsp;
-        <span class="text-gray-600 text-sm font-semibold">{{'- '.strtoUpper(auth()->user()->user_type)}}</span>
+    <div class="flex flex-col justify-center rounded mx-5 my-5">
+        <span class="text-red-500 text font-semibold text-center">{{strtoUpper(auth()->user()->user_type)}}</span>
+        <span class="text-gray-600 text-sm text-center">{{auth()->user()->name}}</span>
     </div>
     <div class="flex justify-center mt-10">
         <div class="basis-9/12">
@@ -20,7 +20,7 @@
             <div class="flex flex-col">
                 @if (auth()->user()->user_type == 'Admin')
                     <a href="{{route('leaders.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
-                        <span class="text-red-400"><i class="fa fa-street-view"></i></span>&emsp; 
+                        <span class="text-red-400"><i class="fa fa-street-view"></i></span>&emsp;&nbsp;
                         Zone Heads 
                         <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                     </a>
@@ -43,7 +43,7 @@
                     </a>
                 @endif --}}
                 <a href="{{route('reports.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
-                    <span class="text-red-400"><i class="fa fa-file-invoice"></i></span>&emsp; 
+                    <span class="text-red-400"><i class="fa fa-file-invoice"></i></span>&emsp;&nbsp;&nbsp;
                     Reports 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                 </a>

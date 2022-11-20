@@ -1,6 +1,18 @@
 <x-app-layout>
     @section('title', 'Dashboard')
 
+    @isset($new_reports)
+        <div class="flex justify-start mt-12 pl-3 pr-6">
+            <span class="text-lg text-gray-700 font pt-2">Members Statistics</span>
+        </div>
+        @foreach ($new_reports as $report)
+            <div id="new_member_added" class="flex justify-between my-6 mr-20 ml-5 px-2 py-1 border border-green-500 rounded">
+                <span class="text-sm text-green-500">{{$report->zone_leader->name.' Report for '.$report->zone_leader->zone->name.' Ready'}}</span>
+                <a class="mt-1 text-xs text-red-400 hover:text-green-400 hover:cursor-pointer" href="{{route('reports.view', [$report])}}">View Report</a>
+            </div>
+        @endforeach
+    @endisset
+
     <div class="flex justify-start mt-12 pl-3 pr-6">
         <span class="text-lg text-gray-700 font pt-2">Members Statistics</span>
     </div>
@@ -45,17 +57,7 @@
                 </x-table> 
             </div>
         </div>
-        <div class="basis-1/2 pl-3">
-            <div class="flex justify-start mb-8">
-                <span class="text-lg text-gray-700 pt-2">Notifications</span>
-            </div>
-            @foreach ($new_reports as $report)
-                <div id="new_member_added" class="flex justify-between my-6 mr-5 px-2 py-1 border border-green-500 rounded">
-                    <span class="text-sm text-green-500">{{$report->zone_leader->name.' Report for '.$report->zone_leader->zone->name.' Ready'}}</span>
-                    <a class="mt-1 text-xs text-red-400 hover:text-green-400 hover:cursor-pointer" href="{{route('reports.view', [$report])}}">View Report</a>
-                </div>
-            @endforeach
-        </div>
+        <div class="basis-1/2 pl-3"></div>
     </div>
     @push('modals')
         <!-- Add Zone modal -->

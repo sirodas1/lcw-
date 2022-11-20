@@ -12,44 +12,32 @@
         <span class="text-red-900 text-lg">[[ERROR]] ::: {{session()->get('error_message')}}</span>
       </div>
     @endif
-    <div class="flex justify-center gap-6 mt-8 px-6 mb-5">
-      <div class="basis-1/2">
-        <div class="flex justify-center gap-4">
-          <span class="text-gray-500">Sunday Date :</span>
-          <span class="text-base text-red-400 font-semibold">{{$report->sunday_date}}</span>
-        </div>
+    <div class="grid grid-cols-3 gap-6 mt-8 px-6 mb-5">
+      <div class="flex gap-4 ml-5">
+        <span class="text-gray-500">Date :</span>
+        <span class="text-base text-red-400 font-semibold">{{date('D dS M Y', strtotime($report->sunday_date))}}</span>
       </div>
-      <div class="basis-1/2">
-        <div class="flex justify-center gap-4">
-          <span class="text-gray-500">Arrival Time :</span>
-          <span class="text-base text-red-400 font-semibold">{{$report->arrival_time}}</span>
-        </div>
+      <div class="flex gap-4 ml-5">
+        <span class="text-gray-500">Arrival Time :</span>
+        <span class="text-base text-red-400 font-semibold">{{$report->arrival_time}}</span>
+      </div>
+      <div class="flex gap-4 ml-3">
+        <span class="text-gray-500">Members Absent :</span>
+        <span class="text-base text-red-400 font-semibold">{{$report->absent_members->count()}}</span>
       </div>
     </div>
     <div class="grid grid-cols-3 gap-6 px-6 mb-5">
-      <div>
-        <div class="flex justify-center">
-          <span class="text-gray-500">Number of New Souls Brought :</span>
-        </div>
-        <div class="flex justify-center">
-          <span class="text-base text-red-400 font-semibold">{{$report->number_of_new_souls}}</span>
-        </div>
+      <div class="flex gap-4 ml-5">
+        <span class="text-gray-500">New Souls Brought :</span>
+        <span class="text-base text-red-400 font-semibold">{{$report->number_of_new_souls}}</span>
       </div>
-      <div>
-        <div class="flex justify-center">
-          <span class="text-base text-gray-500">Means of Transport :</span>
-        </div>
-        <div class="flex justify-center">
-          <span class="text-base text-red-400 font-semibold">{{$report->means_of_transport}}</span>
-        </div>
+      <div class="flex gap-4 ml-5">
+        <span class="text-base text-gray-500">Means of Transport :</span>
+        <span class="text-base text-red-400 font-semibold">{{$report->means_of_transport}}</span>
       </div>
-      <div>
-        <div class="flex justify-center">
-          <span class="text-base text-gray-500">Number of Vehicles Brought :</span>
-        </div>
-        <div class="flex justify-center">
-          <span class="text-base text-red-400 font-semibold">{{$report->number_of_vehicles_brought}}</span>
-        </div>
+      <div class="flex gap-4 ml-3">
+        <span class="text-base text-gray-500">Vehicles Brought :</span>
+        <span class="text-base text-red-400 font-semibold">{{$report->number_of_vehicles_brought}}</span>
       </div>
     </div>
     <div class="grid grid-cols-1 gap-6 px-6 mb-5 mt-10">
@@ -59,7 +47,7 @@
             <span class="text-base block font-medium text-gray-500">Attendance for Members</span>
           </div>
           @php
-            $headings = ['Member Name', 'Attended', 'Report'];
+            $headings = ['Member Name', 'Attended', 'Note'];
           @endphp
           <x-table :headings="$headings">
             @foreach ($report->members_attendance as $member)

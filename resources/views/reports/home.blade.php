@@ -1,11 +1,11 @@
 <x-app-layout>
   @section('title', 'Reports')
 
-  <div class="flex justify-end mt-12 pl-3 pr-6">
+  {{-- <div class="flex justify-end mt-12 pl-3 pr-6">
     <div class="w-2/12 flex pt-1">
       <a href="{{route('reports.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 hover:bg-red-500 px-3"><i class="fa fa-plus"></i>&nbsp; Add Report</a>
     </div>
-  </div>
+  </div> --}}
   <div class="flex mt-10 pl-5 pr-10">
     @php
       $headings = ['Date', 'Zone', 'Status', ''];

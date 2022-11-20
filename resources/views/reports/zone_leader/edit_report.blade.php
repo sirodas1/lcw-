@@ -53,7 +53,7 @@
               <span class="text-base block font-medium text-red-400">Check Attendance for Members</span>
             </div>
             @php
-              $headings = ['', 'Member Name', 'Reason'];
+              $headings = ['', 'Member Name', 'Note'];
             @endphp
             <x-table :headings="$headings">
               @foreach ($report->members_attendance as $member)

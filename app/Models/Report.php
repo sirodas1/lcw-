@@ -22,6 +22,18 @@ class Report extends Model
     {
         return $this->belongsToMany(Member::class, 'sunday_attendance', 'report_id', 'member_id')->withPivot('attendance', 'reason','sunday_date','zone_id');
     }
+    public function absent_members()
+    {
+        return $this->belongsToMany(Member::class, 'sunday_attendance', 'report_id', 'member_id')
+            ->wherePivot('attendance', false)
+            ->withPivot('attendance', 'reason','sunday_date','zone_id');
+    }
+    public function present_members()
+    {
+        return $this->belongsToMany(Member::class, 'sunday_attendance', 'report_id', 'member_id')
+            ->wherePivot('attendance', true)
+            ->withPivot('attendance', 'reason','sunday_date','zone_id');
+    }
     public function visitors_attendance()
     {
         return $this->belongsToMany(Visitor::class, 'sunday_attendance_visitors', 'report_id', 'visitor_id')->withPivot('sunday_date','zone_id');
