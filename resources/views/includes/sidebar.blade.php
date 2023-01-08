@@ -3,7 +3,10 @@
         <img src="{{asset('img/logo.png')}}" class="self-center h-auto w-48">
     </div>
     <div class="flex flex-col justify-center rounded mx-5 my-5">
-        <span class="text-red-500 text font-semibold text-center">{{strtoUpper(auth()->user()->user_type)}}</span>
+        @php
+            $type = (auth()->user()->user_type == 'Admin')? auth()->user()->user_type : "Zonal Head";
+        @endphp
+        <span class="text-red-500 text font-semibold text-center">{{strtoUpper($type)}}</span>
         <span class="text-gray-600 text-sm text-center">{{auth()->user()->name}}</span>
     </div>
     <div class="flex justify-center mt-10">
@@ -21,7 +24,7 @@
                 @if (auth()->user()->user_type == 'Admin')
                     <a href="{{route('leaders.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
                         <span class="text-red-400"><i class="fa fa-street-view"></i></span>&emsp;&nbsp;
-                        Zone Heads 
+                        Zonal Heads 
                         <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                     </a>
                 @endif
@@ -30,11 +33,19 @@
                     Members 
                     <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                 </a>
-                <a href="{{route('visitors.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
-                    <span class="text-red-400"><i class="fa fa-user-plus"></i></span>&emsp; 
-                    Visitors 
-                    <span class="float-right"><i class="fa fa-chevron-right"></i></span>
-                </a>
+                @if (auth()->user()->user_type == 'Admin')
+                    <a href="{{route('visitors.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
+                        <span class="text-red-400"><i class="fa fa-user-plus"></i></span>&emsp; 
+                        First Timers 
+                        <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                @else
+                    <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
+                        <span class="text-red-400"><i class="fa fa-user-plus"></i></span>&emsp; 
+                        ZTP 
+                        <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                @endif
                 {{-- @if (auth()->user()->user_type == 'Admin')
                     <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
                         <span class="text-red-400"><i class="fa fa-calendar-days"></i></span>&emsp; 

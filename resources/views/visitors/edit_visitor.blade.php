@@ -1,11 +1,11 @@
 <x-app-layout>
-  @section('title', 'Edit Visitor')
+  @section('title', 'Edit First Timer')
   @section('back-check', true)
   @section('page-back', route('visitors.home'))
 
   <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-20 mb-10">
     <div class="flex justify-center mt-12 px-6">
-      <span class="text-red-600 text-base">Edit Church Visitor</span>
+      <span class="text-red-600 text-base">Edit First Timer</span>
     </div>
     @if(session()->has('error_message'))
       <div class="flex justify-center mt-12 px-6">
@@ -133,7 +133,7 @@
       </div>
       <div class="flex justify-center gap-6 px-6 my-10">
         <div class="w-5/12">
-          <x-primary-button>Update Visitor</x-primary-button>
+          <x-primary-button>Update First Timer</x-primary-button>
         </div>
       </div>
     </form>

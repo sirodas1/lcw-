@@ -52,7 +52,7 @@ class DashboardController extends Controller
         $number_fs_uncompleted = Member::where('foundation_sch_status', false)->count();
         $attendance = [
             'Last Sunday Church Members Attendance' => $members_attendence,
-            'Last Sunday Visitors Attendance' => $visitors_attendence,
+            'Last Sunday First Timers Attendance' => $visitors_attendence,
             'Number of Members who Completed Foundation Sch.' => $number_fs_completed,
             'Number of Members who are still in Foundation Sch.' => $number_fs_uncompleted,
         ];
@@ -106,9 +106,9 @@ class DashboardController extends Controller
             'name' => 'Assigned Members',
             'number' => $zone->catchments->loadCount('members')->sum('members_count'),
         ];
-        //Assigned of visitors;
+        //Assigned of First Timers;
         $statistics[] = [
-            'name' => 'Assigned Visitors',
+            'name' => 'Assigned First Timers',
             'number' => $zone->catchments->loadCount('visitors')->sum('visitors_count'),
         ];
         

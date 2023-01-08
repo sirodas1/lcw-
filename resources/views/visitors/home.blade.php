@@ -1,12 +1,12 @@
 <x-app-layout>
-  @section('title', 'Visitors')
+  @section('title', 'First Timers')
 
 <div class="flex justify-between w-full mt-12 pl-3 pr-6">
   <div class="w-6/12">
     <x-search-bar criteria="visitors"/>
   </div>
   <div class="w-2/12 flex pt-1">
-    <a href="{{route('visitors.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 hover:bg-red-500 px-3"><i class="fa fa-plus"></i>&nbsp; Add Visitor</a>
+    <a href="{{route('visitors.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 hover:bg-red-500 px-3"><i class="fa fa-plus"></i>&nbsp; Add First Timer</a>
   </div>
 </div>
 <div class="flex mt-10 pl-5 pr-10">
@@ -47,7 +47,7 @@
       var link_addMember = button.dataset.routeAddMember;
       // console.log(attendance);
       if(attendance >= 4)
-        if(confirm('Do you wish to add this visitor as a church member?'))
+        if(confirm('Do you wish to add this first timer as a church member?'))
           window.location.href = link_addMember;
         else
           window.location.href = link;

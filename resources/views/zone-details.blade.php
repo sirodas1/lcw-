@@ -6,7 +6,7 @@
   <div class="bg-white rounded-lg border border-red-400 shadow-md flex mt-10 ml-5 mr-20 py-5 px-3">
     <div class="flex justify-around my-3 w-full">
       <div>
-        <span class="text-base text-gray-600 font-semibold">Zone Leader : </span>&emsp;
+        <span class="text-base text-gray-600 font-semibold">Zonal Head : </span>&emsp;
         <span class="text-base text-red-500">{{$zone->leader->name ?? 'Unassigned'}}</span>
       </div>
       <button type="button" class="bg-red-400 rounded-md text-white hover:bg-red-500 py-1 w-44" data-modal-toggle="editZone"><i class="fa fa-edit"></i>&nbsp;Edit Zone</button>
@@ -20,7 +20,7 @@
     </div>
     <div class="flex w-full my-5">
       @php
-        $headings = ['Location', 'Number of Members', 'Number of Visitors', '', ''];
+        $headings = ['Location', 'Number of Members', 'Number of First Timers', '', ''];
       @endphp
       <x-table :headings="$headings">
         @foreach ($zone->catchments as $catchment)

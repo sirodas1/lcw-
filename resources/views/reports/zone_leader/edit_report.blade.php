@@ -87,10 +87,10 @@
         <div class="flex justify-start">
           <div class="basis-1/2 px-5">
             <div class="flex justify-center my-3">
-              <span class="text-base block font-medium text-red-400">Check Attendance for Visitors</span>
+              <span class="text-base block font-medium text-red-400">Check Attendance for First Timers</span>
             </div>
             @php
-              $headings = ['', 'Visitor Name'];
+              $headings = ['', 'First Timer Name'];
               $catchments = auth()->user()->zone->catchments->load('visitors');
             @endphp
             <x-table :headings="$headings">

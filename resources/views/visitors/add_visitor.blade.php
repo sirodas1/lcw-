@@ -1,11 +1,11 @@
 <x-app-layout>
-  @section('title', 'Add Visitor')
+  @section('title', 'Add First Timer')
   @section('back-check', true)
   @section('page-back', route('visitors.home'))
 
   <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-20 mb-10">
     <div class="flex justify-center mt-12 px-6">
-      <span class="text-red-600 text-base">Add New Church Visitor</span>
+      <span class="text-red-600 text-base">Add New First Timer</span>
     </div>
     <form action="{{route('visitors.save')}}" method="post">
       @csrf
@@ -127,7 +127,7 @@
       </div>
       <div class="flex justify-center gap-6 px-6 my-10">
         <div class="w-5/12">
-          <x-primary-button>Save Visitor</x-primary-button>
+          <x-primary-button>Save First Timer</x-primary-button>
         </div>
       </div>
     </form>
