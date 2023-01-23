@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\ZoneLeadersController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ZTPController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('update/{report}',[ReportsController::class, 'updateReport'])->name('update');
         Route::get('view/{report}',[ReportsController::class, 'viewReport'])->name('view');
         Route::get('reviewed/{report}',[ReportsController::class, 'reviewedReport'])->name('reviewed');
+    });
+    Route::group(['prefix' => 'ztp', 'as' => 'ztp.'], function () {
+        Route::get('', [ZTPController::class, 'home'])->name('home');
+        Route::post('upload', [ZTPController::class, 'uploadFile'])->name('upload');
+        Route::delete('delete/{file}', [ZTPController::class, 'deleteFile'])->name('delete');
     });
 });
 

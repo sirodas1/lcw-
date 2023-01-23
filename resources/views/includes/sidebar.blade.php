@@ -39,13 +39,12 @@
                         First Timers 
                         <span class="float-right"><i class="fa fa-chevron-right"></i></span>
                     </a>
-                @else
-                    <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
-                        <span class="text-red-400"><i class="fa fa-user-plus"></i></span>&emsp; 
-                        ZTP 
-                        <span class="float-right"><i class="fa fa-chevron-right"></i></span>
-                    </a>
                 @endif
+                <a href="{{route('ztp.home')}}" class="mt-3 text-gray-800 hover:text-red-400">
+                    <span class="text-red-400"><i class="fa fa-upload"></i></span>&emsp;&nbsp;
+                    ZTP 
+                    <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+                </a>
                 {{-- @if (auth()->user()->user_type == 'Admin')
                     <a href="#" class="mt-3 text-gray-800 hover:text-red-400">
                         <span class="text-red-400"><i class="fa fa-calendar-days"></i></span>&emsp; 

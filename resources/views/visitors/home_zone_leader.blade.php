@@ -42,7 +42,7 @@
       var link = button.dataset.route;
       var link_addMember = button.dataset.routeAddMember;
       // console.log(attendance);
-      if(attendance >= 4)
+      if(attendance >= 3)
         if(confirm('Do you wish to add this first timer as a church member?'))
           window.location.href = link_addMember;
         else

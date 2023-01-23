@@ -53,7 +53,7 @@
   </div>
   <div class="flex mt-10 pl-5 pr-10">
     @php
-      $headings = ['Fullname', 'Title', 'Phone Number', 'Occupation', 'Zone', 'Baptized', 'Fds.'];
+      $headings = ['Fullname', 'Title', 'Phone Number', 'Occupation', 'Zone', 'Baptized', 'Fds.', ''];
     @endphp
     <x-table :headings="$headings">
       @foreach ($members as $member)
@@ -69,6 +69,7 @@
           <td class="py-4 px-6">{{$member->catchment->zone->name ?? 'No Zone Assigned'}}</td>
           <td class="py-4 px-6 text-center">{{$member->baptized ? 'Yes' : 'No'}}</td>
           <td class="py-4 px-6 text-center">{{$member->foundation_sch_status ? 'Yes' : 'No'}}</td>
+          <td class="py-4 px-6 text-center"><a href="{{route('members.edit', [$member])}}" class="hover:text-red-500"><i class="fa fa-edit"></i></a></td>
         </tr>
       @endforeach
     </x-table> 
