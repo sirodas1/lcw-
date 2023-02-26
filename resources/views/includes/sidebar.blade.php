@@ -1,4 +1,4 @@
-<div class="h-screen w-72 fixed z-40 top-0 left-0 bg-white overflow-x-hidden pt-4 md:pt-5">
+<div class="invisible lg:visible h-screen w-72 fixed z-40 top-0 left-0 bg-white overflow-x-hidden pt-4 md:pt-5">
     <div class="flex justify-center mt-2">
         <img src="{{asset('img/logo.png')}}" class="self-center h-auto w-48">
     </div>
@@ -59,5 +59,51 @@
                 </a>
             </div>
         </div>
+    </div>
+</div>
+
+{{-- Mobile Navbar --}}
+<nav class="lg:hidden col-span-12 bg-white">
+    <div class="flex justify-between pl-2">
+        <div class="px-0 py-1">
+            <img src="{{asset('img/logo.png')}}" class="self-center h-auto w-36">
+        </div>
+        <div class="w-20 flex justify-center align-middle py-4 group hover:bg-red-400 cursor-pointer" onclick="document.getElementById('mobile_menu').classList.toggle('hidden');">
+            <span class="text-red-400 group-hover:text-white"><i class="fa fa-bars fa-2x"></i></span>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile_menu" class="fixed top-0 left-0 right-0 z-50 hidden w-full h-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 transition ease-in duration-150 bg-white">
+    <div class="flex justify-end my-5 md:my-10 px-6 md:px-14">
+        <button type="button" class="text-gray-700 text-2xl hover:text-red-400" onclick="document.getElementById('mobile_menu').classList.toggle('hidden');"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="flex justify-center my-10">
+        <a href="{{route('dashboard.home')}}" class="text-2xl text-gray-700 hover:text-red-400">Dashboard</a>
+    </div>
+    @if (auth()->user()->user_type == 'Admin')
+        <div class="flex justify-center my-10">
+            <a href="{{route('leaders.home')}}" class="text-2xl text-gray-700 hover:text-red-400">Zonal Heads</a>
+        </div>
+    @endif
+    <div class="flex justify-center my-10">
+        <a href="{{route('members.home')}}" class="text-2xl text-gray-700 hover:text-red-400">Members</a>
+    </div>
+    @if (auth()->user()->user_type == 'Admin')
+        <div class="flex justify-center my-10">
+            <a href="{{route('visitors.home')}}" class="text-2xl text-gray-700 hover:text-red-400">First Timers</a>
+        </div>
+    @endif
+    <div class="flex justify-center my-10">
+        <a href="{{route('ztp.home')}}" class="text-2xl text-gray-700 hover:text-red-400">ZTP</a>
+    </div>
+    <div class="flex justify-center my-10">
+        <a href="{{route('reports.home')}}" class="text-2xl text-gray-700 hover:text-red-400">Reports</a>
+    </div>
+    <div class="flex justify-center my-12">
+        <a href="#" class="text-2xl text-red-600 hover:text-red-500"onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+            <i class="fa fa-sign-out"></i>&nbsp;Logout
+        </a>
     </div>
 </div>

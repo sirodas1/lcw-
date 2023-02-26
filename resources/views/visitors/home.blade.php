@@ -1,11 +1,11 @@
 <x-app-layout>
   @section('title', 'First Timers')
 
-<div class="flex justify-between w-full mt-12 pl-3 pr-6">
-  <div class="w-6/12">
+<div class="flex flex-wrap gap-y-4 justify-between w-full mt-12 pl-3 pr-3 lg:pr-6">
+  <div class="w-full lg:w-6/12">
     <x-search-bar criteria="visitors"/>
   </div>
-  <div class="w-2/12 flex pt-1">
+  <div class="lg:w-2/12 flex pt-1">
     <a href="{{route('visitors.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 hover:bg-red-500 px-3"><i class="fa fa-plus"></i>&nbsp; Add First Timer</a>
   </div>
 </div>

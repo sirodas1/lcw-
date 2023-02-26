@@ -16,7 +16,7 @@
     <body class="font-sans antialiased bg-pink-50">
         <div class="grid grid-cols-12">
             @include('includes.sidebar')
-            <div class="col-start-4 col-span-9">
+            <div class="col-span-12 lg:col-start-4 lg:col-span-9">
                 <div class="container">
                     @include('includes.topbar')
                     {{ $slot }}

@@ -9,8 +9,8 @@
             @endif
             <span class="text-xl text-gray-600"><strong>@yield('title')</strong></span>
         </div>
-        <div class="pl-4 py-4 group hover:bg-red-400">
-            <div class="flex justify-end">
+        <div class="pl-4 py-4 group lg:hover:bg-red-400">
+            <div class="flex justify-end invisible lg:visible">
                 <div class="mr-4">
                     <a class="text-base text-red-600 group-hover:text-white font-bold" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

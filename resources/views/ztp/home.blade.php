@@ -19,7 +19,7 @@
     </div>
   @endif
 
-  <div class="flex mt-10 pl-5 pr-10">
+  <div class="flex mt-10 pl-5 pr-5 lg:pr-10">
     @php
       $headings = ['Filename', 'File Type', 'Uploaded Date', ''];
     @endphp
@@ -69,15 +69,15 @@
           <div class="p-6 space-y-6">
             <form id="uploadNewFile" action="{{route('ztp.upload')}}" method="post" enctype="multipart/form-data">
               @csrf
-              <div class="grid grid-cols-2 gap-6 mb-5">
-                <div class="grid grid-cols-3">
-                  <div class="col-span-1 h-full">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-5">
+                <div class="grid grid-cols-4 lg:grid-cols-3">
+                  <div class="col-span-2 lg:col-span-1 h-full">
                     <x-input-label class="mt-2" for="filename">Enter Filename : </x-input-label>
                   </div>
                   <x-text-input class="col-span-2" name="filename" type="text" required/>
                 </div>
-                <div class="grid grid-cols-3">
-                  <div class="col-span-1 h-full">
+                <div class="grid grid-cols-4 lg:grid-cols-3">
+                  <div class="col-span-2 lg:col-span-1 h-full">
                     <x-input-label class="mt-2" for="file_type">Select File Type : </x-input-label>
                   </div>
                   <x-select-option class="col-span-2" name="file_type"  required>

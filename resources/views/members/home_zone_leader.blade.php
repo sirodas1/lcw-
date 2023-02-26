@@ -14,7 +14,7 @@
       <input type="file" id="import_file" name="import_file" onchange="document.getElementById('importForm').submit();" hidden>
     </form>
   </div>
-  <div class="flex mt-10 pl-5 pr-10">
+  <div class="flex mt-10 pl-3 lg:pl-5 pr-3 lg:pr-10">
     @php
       $headings = ['Fullname', 'Phone Number', 'Occupation', 'Zone', 'Baptized'];
     @endphp

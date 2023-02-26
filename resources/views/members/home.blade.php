@@ -8,12 +8,12 @@
   </div>  
 @endif
 @if (auth()->user()->user_type == 'Admin')
-  <div class="flex justify-between mt-12 pl-3 pr-6">
-    <div class="w-6/12">
+  <div class="grid grid-flow-row lg:flex lg:justify-between gap-y-4 mt-12 pl-3 pr-3 lg:pr-6">
+    <div class="lg:w-6/12">
       <x-search-bar criteria="members"/>
     </div>
-    <div class="flex justify-end w-6/12 gap-4">
-      <a href="{{asset('templates/Members_Template.xlsx')}}" download="template.xlsx" class="text-sm text-indigo-300 hover:text-red-400 mt-2">Download Excel Template</a>
+    <div class="flex flex-wrap lg:justify-end lg:w-6/12 gap-4">
+      <a href="{{asset('templates/Members_Template.xlsx')}}" download="template.xlsx" class="text-sm text-indigo-300 hover:text-red-400 mt-2 w-full lg:max-w-max">Download Excel Template</a>
       <a href="javascript: uploadSpreadSheet();" class="bg-red-400 text-center self-center text-white rounded-lg px-2 py-2 hover:bg-red-500"><i class="fa fa-upload"></i>&nbsp; Import</a>
       <a href="{{route('members.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 px-2 hover:bg-red-500"><i class="fa fa-plus"></i>&nbsp; Add Member</a>
     </div>
@@ -22,7 +22,7 @@
       <input type="file" id="import_file" name="import_file" onchange="document.getElementById('importForm').submit();" hidden>
     </form>
   </div>
-  <div class="flex justify-end mt-5 pl-3 pr-6">
+  <div class="flex justify-end mt-5 pl-3 pr-3 lg:pr-6">
     <form id="filterForm" action="{{route('members.home')}}" method="get">
       @csrf
       <div class="">
@@ -51,7 +51,7 @@
       </div>
     </form>
   </div>
-  <div class="flex mt-10 pl-5 pr-10">
+  <div class="flex mt-10 pl-3 lg:pl-5 pr-3 lg:pr-10">
     @php
       $headings = ['Fullname', 'Title', 'Phone Number', 'Occupation', 'Zone', 'Baptized', 'Fds.', ''];
     @endphp
@@ -74,13 +74,13 @@
       @endforeach
     </x-table> 
   </div>
-  <div class="flex justify-center mt-10 pl-5 pr-10">
+  <div class="flex justify-center mt-10 pl-3 lg:pl-5 pr-3 lg:pr-10">
     {{$members->links()}}
   </div> 
 @else
-  <div class="flex justify-end mt-12 pl-3 pr-6">
-    <div class="flex justify-end w-6/12 gap-4">
-      <a href="{{asset('templates/Members_Template.xlsx')}}" download="template.xlsx" class="text-sm text-indigo-300 hover:text-red-400 mt-2">Download Excel Template</a>
+  <div class="flex lg:justify-end mt-12 pl-3 pr-3 lg:pr-6">
+    <div class="flex flex-wrap lg:justify-end w-6/12 gap-4">
+      <a href="{{asset('templates/Members_Template.xlsx')}}" download="template.xlsx" class="text-sm text-indigo-300 hover:text-red-400 mt-2 w-full lg:max-w-max">Download Excel Template</a>
       <a href="javascript: uploadSpreadSheet();" class="bg-red-400 text-center self-center text-white rounded-lg px-2 py-2 hover:bg-red-500"><i class="fa fa-upload"></i>&nbsp; Import</a>
       <a href="{{route('members.add')}}" class="bg-red-400 text-center self-center text-white rounded-lg py-2 px-2 hover:bg-red-500"><i class="fa fa-plus"></i>&nbsp; Add Member</a>
     </div>
@@ -89,7 +89,7 @@
       <input type="file" id="import_file" name="import_file" onchange="document.getElementById('importForm').submit();" hidden>
     </form>
   </div>
-  <div class="flex mt-10 pl-5 pr-10">
+  <div class="flex mt-10 pl-3 lg:pl-5 pr-3 lg:pr-10">
     @php
       $headings = ['Fullname', 'Phone Number', 'Occupation', 'Zone', 'Baptized'];
     @endphp

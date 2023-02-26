@@ -16,7 +16,7 @@
     <div class="flex justify-start mt-12 pl-3 pr-6">
         <span class="text-lg text-gray-700 font pt-2">Members Statistics</span>
     </div>
-    <div class="grid grid-cols-5 gap-6 mt-10 pl-5 pr-10">
+    <div class="flex overflow-auto lg:grid lg:grid-cols-5 gap-6 mt-10 pl-5 pr-5 lg:pr-10">
         @foreach ($statistics as $statistic)
             @if(array_key_exists('link', $statistic))
                 <x-statistic-tab-option name="{{$statistic['name']}}"  number="{{$statistic['number']}}" onclick="window.location.href='{{$statistic['link']}}';"/>
@@ -27,15 +27,15 @@
     </div>
     <div class="flex justify-between mt-12 pl-3 pr-6">
         <span class="text-lg text-gray-700 font pt-2">Zones</span>
-        <button class="bg-red-400 text-white rounded-lg w-2/12 py-1 hover:bg-red-500"  data-modal-toggle="addZone"><i class="fa fa-plus"></i>&nbsp; Add Zone</button>
+        <button class="bg-red-400 text-white rounded-lg px-3 lg:w-2/12 py-1 hover:bg-red-500"  data-modal-toggle="addZone"><i class="fa fa-plus"></i>&nbsp; Add Zone</button>
     </div>
-    <div class="grid grid-cols-3 gap-6 mt-10 pl-5 pr-10">
+    <div class="flex flex-wrap lg:grid lg:grid-cols-3 gap-6 mt-10 pl-5 pr-5 lg:pr-10">
         @foreach ($zones as $zone)
             <x-zone-tab-option name="{{$zone->name}}" catchment="{{count($zone->catchments)}}" members="{{$zone->catchments->loadCount('members')->sum('members_count')}}" leader="{{$zone->leader->name ?? 'Unassigned'}}" onclick="window.location.href='{{route('dashboard.zone.view', ['zone' => $zone ])}}';"/>
         @endforeach
     </div>
-    <div class="flex justify-start gap-8 my-8 pl-3 pr-6">
-        <div class="basis-1/2">
+    <div class="grid grid-cols-2 gap-8 my-8 pl-3 pr-3">
+        <div class="col-span-2 lg:col-span-1">
             <div class="flex justify-start mb-8">
                 <span class="text-lg text-gray-700 pt-2">Statistics & Attendance</span>
             </div>
@@ -57,7 +57,6 @@
                 </x-table> 
             </div>
         </div>
-        <div class="basis-1/2 pl-3"></div>
     </div>
     @push('modals')
         <!-- Add Zone modal -->

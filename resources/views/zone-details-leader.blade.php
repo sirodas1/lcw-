@@ -3,16 +3,16 @@
   @section('back-check', true)
   @section('page-back', route('dashboard.home'))
 
-  <div class="bg-white rounded-lg border border-red-400 shadow-md flex mt-10 ml-5 mr-20 py-5 px-3">
+  <div class="bg-white rounded-lg border border-red-400 shadow-md flex mt-10 ml-5 mr-5 lg:mr-20 py-5 px-3">
     <div class="flex justify-center my-3 w-full">
       <div>
-        <span class="text-base text-gray-600 font-semibold">Zonal Head : </span>&emsp;
+        <span class="text-base text-gray-600 font-semibold block lg:inline">Zonal Head : </span><span class="hidden lg:inline">&emsp;</span>
         <span class="text-base text-red-500">{{$zone->leader->name ?? 'Unassigned'}}</span>
       </div>
     </div>
   </div>
 
-  <div class="bg-white rounded-lg border border-red-400 shadow-md mt-5 ml-5 mr-20 py-5 px-3">
+  <div class="bg-white rounded-lg border border-red-400 shadow-md mt-5 ml-5 mr-5 lg:mr-20 py-5 px-3">
     <div class="flex justify-around w-full my-3">
       <span class="text-base text-gray-600 font-semibold">Catchments </span>
     </div>

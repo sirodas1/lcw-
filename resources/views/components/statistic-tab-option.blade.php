@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'group bg-white rounded-lg p-5 px-2 hover:bg-red-400 hover:cursor-pointer shadow-sm hover:shadow-lg'])}}>
+<div {{ $attributes->merge(['class' => 'group bg-white rounded-lg p-5 px-2 hover:bg-red-400 hover:cursor-pointer shadow-sm hover:shadow-lg min-w-max'])}}>
   <div class="flex justify-start text-red-400 group-hover:text-white">
     <span class="text-sm font-semibold text-center">{{$name}}</span>
   </div>

@@ -3,13 +3,13 @@
   @section('back-check', true)
   @section('page-back', route('visitors.home'))
 
-  <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-20 mb-10">
+  <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-5 lg:mr-20 mb-10">
     <div class="flex justify-center mt-12 px-6">
       <span class="text-red-600 text-base">Add New First Timer</span>
     </div>
     <form action="{{route('visitors.save')}}" method="post">
       @csrf
-      <div class="grid grid-cols-3 gap-6 mt-8 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="firstname">Enter Firstname * : </x-input-label>
           <x-text-input name="firstname" type="text" required/>
@@ -23,7 +23,7 @@
           <x-text-input name="othername" type="text"/>
         </div>
       </div>
-      <div class="grid grid-cols-4 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 mb-5">
         @php
           $genders = ['Male', 'Female'];
           $maritals = ['Single','Married', 'Divorced'];
@@ -58,7 +58,7 @@
           <x-text-input name="dob" type="date" required/>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="phone_number">Phone Number * :</x-input-label>
           <x-text-input name="phone_number" type="text" required/>
@@ -78,7 +78,7 @@
           <x-text-input name="previous_church_bg" type="text"/>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="location">Location * :</x-input-label>
           <x-text-input name="location" type="text" required/>
@@ -96,7 +96,7 @@
           <x-text-input name="invited_by" type="text"/>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-6 px-6 mb-5">
+      <div class="grid rid-cols-1 md:grid-cols-2 lg:flex gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="any_relations">Any Relations in the Church * :</x-input-label>
           <x-select-option id="any_relations" name="any_relations" onchange="toggleRelationDiv('any_relations')">

@@ -3,17 +3,17 @@
   @section('back-check', true)
   @section('page-back', route('dashboard.home'))
 
-  <div class="bg-white rounded-lg border border-red-400 shadow-md flex mt-10 ml-5 mr-20 py-5 px-3">
+  <div class="bg-white rounded-lg border border-red-400 shadow-md flex mt-10 ml-5 mr-5 lg:mr-20 py-5 px-3">
     <div class="flex justify-around my-3 w-full">
       <div>
-        <span class="text-base text-gray-600 font-semibold">Zonal Head : </span>&emsp;
+        <span class="text-base text-gray-600 font-semibold block lg:inline">Zonal Head : </span><span class="hidden lg:inline">&emsp;</span>
         <span class="text-base text-red-500">{{$zone->leader->name ?? 'Unassigned'}}</span>
       </div>
-      <button type="button" class="bg-red-400 rounded-md text-white hover:bg-red-500 py-1 w-44" data-modal-toggle="editZone"><i class="fa fa-edit"></i>&nbsp;Edit Zone</button>
+      <button type="button" class="bg-red-400 rounded-md text-white hover:bg-red-500 lg:py-1 w-24 lg:w-44 text-sm lg:text-base" data-modal-toggle="editZone"><i class="fa fa-edit"></i>&nbsp;Edit Zone</button>
     </div>
   </div>
 
-  <div class="bg-white rounded-lg border border-red-400 shadow-md mt-5 ml-5 mr-20 py-5 px-3">
+  <div class="bg-white rounded-lg border border-red-400 shadow-md mt-5 ml-5 mr-5 lg:mr-20 py-5 px-3">
     <div class="flex justify-between w-full my-3">
       <span class="text-base text-gray-600 font-semibold">Catchments </span>
       <button type="button" class="bg-red-400 rounded-md text-white hover:bg-red-500 py-1 w-44" data-modal-toggle="addCatchment"><i class="fa fa-plus" t></i>&nbsp;Add Catchment</button>

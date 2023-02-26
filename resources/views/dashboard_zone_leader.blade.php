@@ -15,13 +15,13 @@
     </div>
     @endif
 
-    <div class="grid grid-cols-3 gap-6 mt-10 pl-5 pr-10">
+    <div class="flex flex-wrap lg:grid lg:grid-cols-3 gap-6 mt-10 pl-5  pr-5 lg:pr-10">
         <x-zone-tab-option name="{{$zone->name}}" catchment="{{count($zone->catchments)}}" members="{{$zone->catchments->loadCount('members')->sum('members_count')}}" leader="{{$zone->leader->name ?? 'Unassigned'}}" onclick="window.location.href='{{route('dashboard.zone.view', ['zone' => $zone ])}}';"/>
     </div>
     <div class="flex justify-start mt-10 pl-5 pr-10">
         <span class="text-lg text-gray-600 font-semibold ">Statistics</span>
     </div>
-    <div class="grid grid-cols-5 gap-6 mt-10 pl-5 pr-10">
+    <div class="flex overflow-auto lg:grid lg:grid-cols-5 gap-6 mt-10 pl-5 pr-5 lg:pr-10">
         @foreach ($statistics as $statistic)
             <x-statistic-tab-option name="{{$statistic['name']}}"  number="{{$statistic['number']}}"/>
         @endforeach

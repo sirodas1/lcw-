@@ -3,7 +3,7 @@
   @section('back-check', true)
   @section('page-back', route('members.home'))
 
-  <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-20 mb-10">
+  <div class="bg-gray-50 border border-red-300 rounded-lg shadow-md mt-12 ml-5 mr-5 lg:mr-20 mb-10">
     <div class="flex justify-center mt-12 px-6">
       <span class="text-red-600 text-base">Edit Church Member</span>
     </div>
@@ -14,7 +14,7 @@
     @endif
     <form action="{{route('members.update', [$member])}}" method="post">
       @csrf
-      <div class="grid grid-cols-3 gap-6 mt-8 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="firstname">Enter Firstname * : </x-input-label>
           <x-text-input name="firstname" type="text" value="{{$member->firstname ?? old('firstname')}}" required/>
@@ -28,7 +28,7 @@
           <x-text-input name="othername" value="{{$member->othername ?? old('othername')}}" type="text"/>
         </div>
       </div>
-      <div class="grid grid-cols-4 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 mb-5">
         @php
           $genders = ['Male', 'Female'];
           $maritals = ['Single','Married', 'Divorced'];
@@ -63,7 +63,7 @@
           <x-text-input name="dob" type="date" value="{{$member->dob ?? old('dob')}}" required/>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="phone_number">Phone Number * :</x-input-label>
           <x-text-input name="phone_number" type="text" value="{{$member->phone_number ?? old('phone_number')}}" required/>
@@ -77,7 +77,7 @@
           <x-text-input name="occupation" type="text" value="{{$member->occupation ?? old('occupation')}}" required/>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="position">Position In Church : </x-input-label>
           <x-text-input name="position" type="text" value="{{$member->position ?? old('position')}}" placeholder="eg. Usher or Chorister"/>
@@ -87,7 +87,7 @@
           <x-text-input name="previous_church_bg" type="text" value="{{$member->previous_church_bg ?? old('previous_church_bg')}}"/>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-6 px-6 mb-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 mb-5">
         <div class="flex justify-start flex-col">
           <x-input-label for="location">Location * :</x-input-label>
           <x-text-input name="location" type="text" value="{{$member->location ?? old('location')}}" required/>
@@ -106,8 +106,8 @@
           <x-text-input name="invited_by" type="text" value="{{$member->invited_by ?? old('invited_by')}}"/>
         </div>
       </div>
-      <div class="flex gap-6 px-6 mb-5">
-        <div class="flex justify-start flex-col w-4/12">
+      <div class="grid-cols-1 md:grid-cols-2 lg:flex gap-6 px-6 mb-5">
+        <div class="flex justify-start flex-col lg:w-4/12">
           <x-input-label for="any_relations">Any Relations in the Church * :</x-input-label>
           <x-select-option id="any_relations" name="any_relations" onchange="toggleRelationDiv('any_relations')">
             <option value="null">No One</option>
