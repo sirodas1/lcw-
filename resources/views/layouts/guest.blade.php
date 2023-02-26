@@ -13,10 +13,10 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="max-h-screen overflow-hidden bg-pink-50">
-        <div class="absolute -bottom-56 -left-60 -z-10">
-            <div class="opacity-40 ">
-                <img src="{{asset('img/LCW.png')}}" class="w-3/5">
+    <body class="h-screen md:overflow-hidden bg-pink-50">
+        <div class="flex justify-center mt-20 md:absolute md:-bottom-56 md:-left-60 md:-z-10">
+            <div class="opacity-40">
+                <img src="{{asset('img/LCW.png')}}" class="w-52 md:w-3/5">
             </div>
         </div>
         <div class="font-sans text-gray-900 antialiased">
